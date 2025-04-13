@@ -108,11 +108,7 @@ body, html {
   transform: scale(1.05);
 }
 
-/* ===== SIDEBAR ===== */
-.sidenav-container {
-  height: 100%;
-  margin-top: 64px;
-}
+
 .sidebar {
   width: 260px;
   background: #fff;
@@ -124,6 +120,7 @@ body, html {
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
+  z-index: -2;
 }
 
 /* Profile Section in Sidebar */

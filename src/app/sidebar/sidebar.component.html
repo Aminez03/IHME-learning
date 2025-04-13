@@ -49,15 +49,10 @@
       alt="Photo de Profil"
       class="avatar"
     />
-    <h3>{{ userData.nom || "Utilisateur" }}</h3>
+    <h3>{{ userData.nom || "Utilisateur" }} {{userData.prenom}}</h3>
   </div>
   <div class="profile-actions">
-    <button mat-button routerLink="/login" class="action-button">
-      <mat-icon>login</mat-icon> Connexion
-    </button>
-    <button mat-button routerLink="/register" class="action-button">
-      <mat-icon>person_add</mat-icon> Inscription
-    </button>
+
     <button
       mat-button
       (click)="logout()"

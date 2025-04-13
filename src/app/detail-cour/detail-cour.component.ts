@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Cour } from 'src/Models/Cour';
@@ -110,13 +110,24 @@ export class DetailCourComponent implements OnInit {
     });
   }
 
+
+  
   // ✅ Clic sur la vidéo
-  onVideoClick(event: Event): void {
-    const videoElement = event.target as HTMLVideoElement;
-    if (videoElement.paused) {
-      this.updateProgression();
-    }
+ onVideoClick(event: Event): void {
+  const videoElement = event.target as HTMLVideoElement;
+
+  if (videoElement.paused) {
+
+    this.updateProgression();
+
+    // Wait briefly then reload
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   }
+}
+
+  
 
   // ✅ Charger la formation, sous-catégorie et catégorie
   private loadFormationDetails(formationID: number): void {

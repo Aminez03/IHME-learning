@@ -1,34 +1,121 @@
-<div class="certif-container" *ngIf="certificat && formation; else loading">
-    <div class="certif-card" id="certificat">
-      <h1>🎓 Certificat de Réussite</h1>
-      <p class="candidate-name">
-        Ce certificat est attribué à <strong>{{ certificat.candidat.nom }} {{ certificat.candidat.prenom }}</strong>
-      </p>
-      <p>Pour avoir complété avec succès la formation :</p>
-      <h2>{{ formation.nomFormation }}</h2>
-      <div class="certif-details">
-        <p><strong>Date d'obtention :</strong> {{ certificat.dateObtention }}</p>
-        <p><strong>Note :</strong> {{ certificat.note }}</p>
-        <p><strong>Statut :</strong> {{ certificat.statut }}</p>
-        <p><strong>Date de création :</strong> {{ certificat.created_at }}</p>
-      </div>
-      <button (click)="generatePDF()" >📄 Télécharger le certificat</button>
-      <br>
-      
-      
-      <button (click)="goHome()">🏠 Retour à l'accueil</button>
+<app-sidebar></app-sidebar>
 
+<div class="header">
+  <mat-card-actions class="breadcrumb">
+
+    <a mat-button color="primary" routerLink="/formations">
+      Accueil
+    </a>
+
+    <a *ngIf="Categorie" mat-button color="primary" [routerLink]="['/formations', Categorie.nomCategorie]">
+     
+      {{ Categorie.nomCategorie }}
+    </a>
+
+    <a *ngIf="Categorie" mat-button color="primary" [routerLink]="['/formations']">
+      {{ Categorie.nomCategorie }}
+    </a>
+
+    <a *ngIf="sousCategorie" mat-button color="primary" [routerLink]="['/detail-formation', formation?.id]">
+      {{ sousCategorie.nomSousCategorie }}
+      {{ formation?.nomFormation }}
+    </a>
+
+    <a *ngIf="session" mat-button color="primary" [routerLink]="['/session', session.id]">
+ 
+      Session
+    </a>
+
+
+    <a *ngIf="session" mat-button color="primary" [routerLink]="['/examan', session.id]">
+ 
+      Examen
+    </a>
+
+    <a *ngIf="session" mat-button color="primary" [routerLink]="['/certif-session', certificat.id]">
+ 
+      Certif
+    </a>
+
+
+  </mat-card-actions>
+</div>
+<div class="certif-container" *ngIf="certificat && formation; else loading">
+  
+
+    <div class="certif-card" id="certificat">
+      <div class="certif-header">
+        <div class="certif-badge">🏆</div>
+        <h1>Certificat de Réussite</h1>
+        <div class="certif-ribbon"></div>
+      </div>
+      
+      <div class="certif-body">
+        <p class="certif-presented">Ce certificat est fièrement présenté à</p>
+        <p class="candidate-name">{{ certificat.candidat.nom }} {{ certificat.candidat.prenom }}</p>
+        
+        <div class="certif-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">🎓</span>
+          <span class="divider-line"></span>
+        </div>
+        
+        <p class="certif-for">Pour avoir complété avec succès la formation</p>
+        <h2>{{ formation.nomFormation }}</h2>
+        
+        <div class="certif-seal">
+          <div class="seal-inner">
+            <span>Validé</span>
+          </div>
+        </div>
+        
+        <div class="certif-details">
+          <div class="detail-item">
+            <mat-icon>event</mat-icon>
+            <span><strong>Date d'obtention :</strong> {{ certificat.dateObtention | date:'longDate' }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>grade</mat-icon>
+            <span><strong>Note :</strong> {{ certificat.note }}/20</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>verified</mat-icon>
+            <span><strong>Statut :</strong> {{ certificat.statut }}</span>
+          </div>
+          <div class="detail-item">
+            <mat-icon>date_range</mat-icon>
+            <span><strong>Date de création :</strong> {{ certificat.created_at | date:'longDate' }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="certif-actions">
+        <button mat-raised-button color="primary" (click)="generatePDF()">
+          <mat-icon>picture_as_pdf</mat-icon>
+          Télécharger le certificat
+        </button>
+        <button mat-stroked-button (click)="goHome()">
+          <mat-icon>home</mat-icon>
+          Retour à l'accueil
+        </button>
+      </div>
     </div>
   </div>
   
   <ng-template #loading>
-    <div class="loading-message" *ngIf="certificat === undefined">
-      Chargement du certificat...
-    </div>
-    <div class="error-message" *ngIf="certificat === null">
-      ❌ Vous n'avez pas validé cette formation ou votre note est insuffisante.
-      <br /><br />
-      <button (click)="goHome()">🏠 Retour à l'accueil</button>
+    <div class="loading-container">
+      <div *ngIf="certificat === undefined" class="loading-content">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Chargement du certificat...</p>
+      </div>
+      <div *ngIf="certificat === null" class="error-content">
+        <div class="error-icon">❌</div>
+        <h3>Certificat non disponible</h3>
+        <p>Vous n'avez pas validé cette formation ou votre note est insuffisante.</p>
+        <button mat-raised-button color="warn" (click)="goHome()">
+          <mat-icon>home</mat-icon>
+          Retour à l'accueil
+        </button>
+      </div>
     </div>
   </ng-template>
-  

@@ -240,7 +240,7 @@ mat-card img {
 
 
 .add-formation-button{
-  margin-top: 10px;
+  margin-top: 30px;
   background-color: #007bff;
   color: white;
   border-radius: 25px;
@@ -505,6 +505,7 @@ button.mat-raised-button mat-icon {
     position: absolute;
     top: 50%;
     left: 50%;
+    text-align: center;
     transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;

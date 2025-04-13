@@ -1,12 +1,10 @@
+<!-- home.component.html -->
 <div class="home-container">
-  <!-- Barre de navigation -->
+  <!-- Navbar -->
   <nav class="navbar">
-      <div class="nav-brand">
-        <h1 class="elearning-title">
-          <a routerLink="/formations">E-Learning</a>
-        </h1>
-        
-      </div>
+    <div class="nav-brand">
+      <h1>E-Learning</h1>
+    </div>
     <div class="nav-links">
       <a (click)="scrollToSection('home')">Accueil</a>
       <a (click)="scrollToSection('courses')">Formations</a>
@@ -16,7 +14,7 @@
     </div>
   </nav>
 
-  <!-- Section principale avec carrousel -->
+  <!-- Hero Section with Carousel -->
   <section class="hero-section">
     <div class="carousel-container">
       <div class="carousel-slide" *ngFor="let slide of carouselImages; let i = index" [class.active]="i === currentSlide">
@@ -32,9 +30,33 @@
     </div>
   </section>
 
-  <!-- Section des formations -->
+
+  <!-- Categories Filter -->
+  <section class="filter-section">
+    <div class="filter-container">
+      <!-- Categories -->
+      <div *ngIf="!selectedCategory" class="categories-container">
+        <div *ngFor="let category of categories" class="category-card" (click)="onCategorySelect(category)">
+          <h3>{{ category.nomCategorie }}</h3>
+        </div>
+      </div>
+
+      <!-- Subcategories -->
+      <div *ngIf="selectedCategory" class="subcategories-container">
+        <button mat-button color="primary" (click)="resetSelection()">
+          <mat-icon>arrow_back</mat-icon> Back to Categories
+        </button>
+        <h2>{{ selectedCategory.nomCategorie }}</h2>
+        <div *ngFor="let subcategory of subcategories" class="subcategory-item" (click)="onSubCategorySelect(subcategory)">
+          <p>{{ subcategory.nomSousCategorie }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Courses -->
   <section id="courses" class="courses-section">
-    <h2>Nos Formations</h2>
+    <h2>Our Courses</h2>
     <div class="courses-grid">
       <mat-card *ngFor="let formation of filteredFormations" class="course-card">
         <img mat-card-image [src]="formation.image" [alt]="formation.nomFormation">
@@ -43,12 +65,11 @@
           <p>{{ formation.description | slice:0:100 }}...</p>
           <div class="course-details">
             <span>{{ formation.niveau }}</span>
-            <span>{{ formation.duree }} mois</span>
+            <span>{{ formation.duree }} months</span>
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button color="primary" (click)="goToLogin()" matTooltip="Voir détail de la formation"
-          aria-label="Voir détail de la formation">
+          <button mat-button color="primary" [routerLink]="['/detail-formation', formation.id]">
             En savoir plus
           </button>
         </mat-card-actions>
@@ -56,22 +77,4 @@
     </div>
   </section>
 
-  <!-- Pied de page -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div id="about" class="footer-section">
-        <h3>À propos</h3>
-        <p>Nous sommes une plateforme d’e-learning leader dédiée à offrir une éducation de qualité à tous, partout.</p>
-      </div>
-      <div id="contact" class="footer-section">
-        <h3>Contact</h3>
-        <p>Email : E-learnig@gmail.com</p>
-        <p>Téléphone : +216 27055885</p>
-        <p>Adresse : Tunisie,sfax,Sidi MAnsour</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      
-    </div>
-  </footer>
 </div>

@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  isDarkMode = false;
   title = 'E-learning';
   logo = 'assets/images/login-elearning.svg';
+  
 }

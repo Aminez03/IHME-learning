@@ -239,3 +239,15 @@
     width: 100%;
   }
 }
+.breadcrumb a {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumb a + a::before {
+  content: '/';
+  color: #999;
+  padding: 0 8px;
+}

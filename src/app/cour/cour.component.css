@@ -1,3 +1,4 @@
+
 /* ========== Global Reset ========== */
 * {
   margin: 0;
@@ -5,42 +6,12 @@
   box-sizing: border-box;
 }
 
-/* ========== Conteneur principal ========== */
-.sidenav-container {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* ========== Sidebar ========== */
-.sidebar {
-  width: 250px;
-  background: #ffffff;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  height: 100%;
-  z-index: 1000;
-}
-
-app-sidebar profile-menu {
-  position: fixed;
-  top: 80px;
-  right: 24px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 16px;
-  width: 220px;
-  z-index: 1001;
-  animation: slideIn 0.2s ease-out;
-}
-
 /* ========== Contenu principal ========== */
 .cours-section {
-width: 400px;
-  flex: 1;
   padding: 24px;
   background-color: #fafafa;
   min-height: 100vh;
+  width: 100%;
 }
 
 /* ========== Contenu interne ========== */
@@ -52,8 +23,6 @@ width: 400px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-
-
 }
 
 .content:hover {
@@ -77,12 +46,13 @@ width: 400px;
   letter-spacing: 0.5px;
 }
 
-/* ========== Grille des cours ========== */
+/* ========== Conteneur des cours ========== */
 .cours-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 24px;
   margin-bottom: 24px;
+  justify-content: center; /* Center cards to balance space on both sides */
 }
 
 /* ========== Carte cours ========== */
@@ -93,6 +63,9 @@ width: 400px;
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.2s ease;
+  flex: 0 1 calc(33.333% - 16px); /* Allow cards to shrink slightly if needed */
+  min-width: 300px; /* Minimum width for smaller screens */
+  max-width: calc(50% - 16px); /* Adjusted to allow at most 2 cards per row */
 }
 
 .cours-card:hover {
@@ -149,11 +122,30 @@ mat-card-actions button {
   font-size: 1rem;
 }
 
+/* ========== Debug Message ========== */
+.debug-message {
+  color: #ff5722;
+  text-align: center;
+  font-size: 1rem;
+  margin: 16px 0;
+}
+
 /* ========== Paginator ========== */
 mat-paginator {
   margin-top: 24px;
   background-color: #f5f5f5;
   border-radius: 4px;
+  display: block; /* Ensure paginator is visible */
+  position: relative; /* Prevent overlap */
+  z-index: 1; /* Ensure it's above other elements */
+  padding: 8px; /* Add padding for better visibility */
+}
+
+/* Ensure paginator is visible even with 0 items */
+:host ::ng-deep .mat-paginator-container {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ========== Bouton "Ajouter un Cours" ========== */
@@ -198,7 +190,6 @@ button.mat-raised-button mat-icon {
 
 /* ========== Progress ========== */
 .progress-card {
-
   padding: 24px;
   text-align: center;
 }
@@ -239,85 +230,7 @@ button.mat-raised-button mat-icon {
   color: #757575;
 }
 
-/* ========== Mode sombre ========== */
-@media (prefers-color-scheme: dark) {
-  .cours-section {
-    background-color: #1e1e1e;
-  }
-
-  .content,
-  .cours-card {
-    background-color: #2d2d2d;
-    color: #e0e0e0;
-  }
-
-  .cours-card mat-card-header {
-    background-color: #1e88e5;
-  }
-
-  .cours-card-body p {
-    color: #e0e0e0;
-  }
-
-  mat-card-actions {
-    background-color: #333333;
-    border-top: 1px solid #444444;
-  }
-
-  .no-cours-text {
-    color: #aaaaaa;
-  }
-
-  mat-paginator {
-    background-color: #333333;
-    color: #e0e0e0;
-  }
-
-  .progress-heading {
-    color: #90caf9;
-  }
-}
-
-/* ========== Responsive Design ========== */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-  }
-
-  .cours-section {
-    margin-left: 200px;
-  }
-
-  .cours-container {
-    grid-template-columns: 1fr;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .video-container video {
-    height: 160px;
-  }
-}
-
-@media (max-width: 600px) {
-  .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-  }
-
-  .cours-section {
-    margin-left: 0;
-    padding: 16px;
-  }
-
-  .content {
-    padding: 16px;
-  }
-}
+/* ========== Bouton container ========== */
 .button-container {
   display: flex;
   justify-content: center;
@@ -347,10 +260,50 @@ button[mat-raised-button] {
 }
 
 button[mat-raised-button]:hover {
-  background-color: #e91e63; /* Ajustez selon votre couleur accent */
+  background-color: #e91e63; /* Adjust based on your accent color */
   transform: scale(1.05);
 }
 
 button[mat-raised-button] mat-icon {
   font-size: 20px;
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+  .cours-card {
+    flex: 0 1 calc(50% - 12px); /* 2 cards per row */
+    max-width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 768px) {
+  .cours-section {
+    padding: 16px;
+  }
+
+  .cours-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cours-card {
+    flex: 0 1 100%; /* Full width */
+    max-width: 100%;
+    min-width: 0; /* Allow full flexibility */
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .video-container video {
+    height: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 16px;
+  }
 }

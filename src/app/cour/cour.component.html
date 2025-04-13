@@ -1,90 +1,121 @@
+<main class="cours-section">
+  <section class="content">
+    <header class="header">
+      <h2>GESTION DES COURS</h2>
+      <button
+        *ngIf="isFormateur()"
+        mat-raised-button
+        color="primary"
+        (click)="open()"
+        aria-label="Ajouter un nouveau cours"
+      >
+        <mat-icon>add</mat-icon> Ajouter un Cours
+      </button>
+    </header>
 
-<div class="sidenav-container">
-  <div class="sidebar">
+    <div class="cours-container mat-elevation-z8">
+      <mat-card class="cours-card" *ngFor="let cours of paginatedCours || []">
+        <mat-card-header>
+          <mat-card-title>{{ cours.titre }}</mat-card-title>
+        </mat-card-header>
 
-  </div>
+        <mat-card-content class="cours-card-body">
+          <p>{{ cours.description }}</p>
+        </mat-card-content>
 
-  <main class="cours-section">
-    <section class="content">
-      <header class="header">
-        <h2>GESTION DES COURS</h2>
-        <button *ngIf="isFormateur()" mat-raised-button color="primary" (click)="open()" aria-label="Ajouter un nouveau cours">
-          <mat-icon>add</mat-icon> Ajouter un Cours
-        </button>
-      </header>
+        <mat-card-content class="video-container">
+          <video
+            controls
+            preload="metadata"
+            [attr.aria-label]="'Vidéo du cours: ' + cours.titre"
+          >
+            <source [src]="cours.videoURL" type="video/mp4" />
+            <p>
+              Votre navigateur ne supporte pas la lecture de vidéos.
+              <a [href]="cours.videoURL">Téléchargez la vidéo</a>.
+            </p>
+          </video>
+        </mat-card-content>
 
-      <div class="cours-container mat-elevation-z8">
-        <mat-card class="cours-card" *ngFor="let cours of paginatedCours || []">
-          <mat-card-header>
-            <mat-card-title>{{ cours.titre }}</mat-card-title>
-          </mat-card-header>
+        <mat-card-actions align="end">
+          <button
+            *ngIf="isFormateur()"
+            mat-icon-button
+            color="primary"
+            (click)="openEdit(cours.id)"
+            aria-label="Modifier le cours"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            *ngIf="isFormateur()"
+            mat-icon-button
+            color="warn"
+            (click)="deleteCours(cours.id)"
+            aria-label="Supprimer le cours"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
 
-          <mat-card-content class="cours-card-body">
-            <p>{{ cours.description }}</p>
-          </mat-card-content>
-
-          <mat-card-content class="video-container">
-            <video controls preload="metadata" [attr.aria-label]="'Vidéo du cours: ' + cours.titre">
-              <source [src]="cours.videoURL" type="video/mp4" />
-              <p>Votre navigateur ne supporte pas la lecture de vidéos. <a [href]="cours.videoURL">Téléchargez la vidéo</a>.</p>
-            </video>
-          </mat-card-content>
-
-          <mat-card-actions align="end">
-            <button *ngIf="isFormateur()" mat-icon-button color="primary" (click)="openEdit(cours.id)" aria-label="Modifier le cours">
-              <mat-icon>edit</mat-icon>
+          <div class="wrapper-eye">
+            <button
+              mat-icon-button
+              color="accent"
+              [routerLink]="['/detail-cour', cours.id]"
+              aria-label="Voir les détails du cours"
+            >
+              <mat-icon>visibility</mat-icon>
             </button>
-            <button *ngIf="isFormateur()" mat-icon-button color="warn" (click)="deleteCours(cours.id)" aria-label="Supprimer le cours">
-              <mat-icon>delete</mat-icon>
-            </button>
-
-            <div class="wrapper-eye">
-              <button mat-icon-button color="accent" [routerLink]="['/detail-cour', cours.id]" aria-label="Voir les détails du cours">
-                <mat-icon>visibility</mat-icon>
-              </button>
-              <div class="alert-message">Voir les détails</div>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-      <ng-container *ngIf="iscandidat()">
-        <ng-container *ngIf="progression; else loadingTemplate">
-          <mat-card class="progress-card mat-elevation-z8">
-            <mat-card-content>
-              <h2 class="progress-heading">Votre progression</h2>
-              <div class="spinner-container">
-                <mat-progress-spinner
-                  class="progress-spinner"
-                  mode="determinate"
-                  [value]="progressionValue"
-                  strokeWidth="5"
-                  aria-label="Progression: {{ progressionValue }}%">
-                </mat-progress-spinner>
-                <div class="progress-value">{{ progressionValue }}%</div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-
-          <div class="button-container">
-            <button mat-raised-button color="accent" [routerLink]="['/examan', sessionid]" aria-label="Aller à l'examen">
-              <mat-icon>assignment</mat-icon> Aller à l'examen
-            </button>
+            <div class="alert-message">Voir les détails</div>
           </div>
-        </ng-container>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    
+    <mat-paginator
+      [length]="dataSource?.length || 0"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="updatePaginatedCours()"
+      aria-label="Naviguer entre les pages de cours"
+    >
+    </mat-paginator>
+   
+    <ng-container *ngIf="iscandidat()">
+      <ng-container *ngIf="progression; else loadingTemplate">
+        <mat-card class="progress-card mat-elevation-z8">
+          <mat-card-content>
+            <h2 class="progress-heading">Votre progression</h2>
+            <div class="spinner-container">
+              <mat-progress-spinner
+                class="progress-spinner"
+                mode="determinate"
+                [value]="progressionValue"
+                strokeWidth="5"
+                aria-label="Progression: {{ progressionValue }}%"
+              >
+              </mat-progress-spinner>
+              <div class="progress-value">{{ progressionValue }}%</div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <div class="button-container" *ngIf="progressionValue === 100">
+          <button mat-raised-button color="accent" [routerLink]="['/examan', sessionid]" aria-label="Aller à l'examen" class="exam-btn">
+            <mat-icon>assignment</mat-icon> Aller à l'examen
+          </button>
+        </div>
       </ng-container>
+    </ng-container>
 
-      <p *ngIf="dataSource?.length === 0" class="no-cours-text">Aucun cours disponible pour cette formation.</p>
+   
 
-      <mat-paginator
-        [length]="dataSource.length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="updatePaginatedCours()"
-        aria-label="Naviguer entre les pages de cours">
-      </mat-paginator>
-    </section>
-  </main>
+    <p *ngIf="dataSource?.length === 0" class="no-cours-text">
+      Aucun cours disponible pour cette formation.
+    </p>
+
+
+  </section>
 
   <ng-template #loadingTemplate>
     <div class="loading-container">
@@ -92,4 +123,4 @@
       <p>Chargement des données...</p>
     </div>
   </ng-template>
-</div>
+</main>

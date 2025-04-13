@@ -104,13 +104,14 @@
               <button mat-icon-button color="primary" 
               matTooltip="inscrire dans la session"
         (click)="inscrire(session.id)" 
-        [disabled]="!iscandidat() || !isInscrit()">
+        [disabled]="!iscandidat() || isInscrit()">
       <mat-icon>how_to_reg</mat-icon>
       </button>
 
               <button mat-icon-button color="accent" [routerLink]="['/session', session.id]"
               
-              [disabled]="isInscrit()" matTooltip="Voir Session"
+              [disabled]="isInscrit()" 
+              matTooltip="Voir Session"
               aria-label="Voir Session">
                 <mat-icon>visibility</mat-icon>
               </button>

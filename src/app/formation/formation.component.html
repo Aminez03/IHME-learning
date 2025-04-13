@@ -3,14 +3,14 @@
   <!-- Contenu principal -->
   <div class="content-wrapper">
       
-   <!-- Hero Section with Carousel -->
+    <!-- Section principale avec carrousel -->
     <section class="hero-section">
       <div class="carousel-container">
         <div class="carousel-slide" *ngFor="let slide of carouselImages; let i = index" [class.active]="i === currentSlide">
           <img [src]="slide.image" [alt]="slide.caption">
           <div class="carousel-caption">
             <h1>{{ slide.caption }}</h1>
-            <p>Explore our wide range of courses and start your learning journey today!</p>
+            <p> Commencez votre parcours d'apprentissage dès aujourd'hui !</p>
             <button mat-raised-button color="primary" (click)="scrollToSection('courses')">
               Parcourir les formations
             </button>
@@ -19,104 +19,93 @@
       </div>
     </section>
  
-  <div class="content">
-
-    <button *ngIf="isAdmin()" mat-raised-button color="primary" (click)="open()" class="add-formation-button">
-      <mat-icon>add</mat-icon> Ajouter Formation
-    </button>
-    
-    <h1 class="categories-title">Notre Categories</h1>
-      <!-- Display categories if no category is selected -->
+    <div class="content">
+      <button *ngIf="isAdmin()" mat-raised-button color="primary" (click)="open()" class="add-formation-button"
+        matTooltip="Ajouter une nouvelle formation" aria-label="Ajouter une nouvelle formation">
+        <mat-icon>add</mat-icon> Ajouter une formation
+      </button>
+      
+      <h1 class="categories-title">Nos catégories</h1>
+      <!-- Afficher les catégories si aucune catégorie n'est sélectionnée -->
       <div *ngIf="!selectedCategory" class="categories-container">
         <div *ngFor="let category of Categories" class="category-card" (click)="selectCategory(category)">
-          <h3>{{ category.nomCategorie }}</h3> <!-- Adjust 'nomCategorie' to match your Categorie model -->
+          <h3>{{ category.nomCategorie }}</h3> <!-- Le champ 'nomCategorie' est déjà en français -->
         </div>
       </div>
 
-      <!-- Display subcategories if a category is selected -->
+      <!-- Afficher les sous-catégories si une catégorie est sélectionnée -->
       <div *ngIf="selectedCategory" class="subcategories-container">
         <button mat-button color="primary" (click)="resetSelection()">
           <mat-icon>arrow_back</mat-icon> Retour aux catégories
         </button>
-        <h2>{{ selectedCategory.nomCategorie }}</h2> <!-- Adjust 'nomCategorie' to match your Categorie model -->
+        <h2>{{ selectedCategory.nomCategorie }}</h2> <!-- Le champ 'nomCategorie' est déjà en français -->
         <div *ngFor="let subcategory of sousCategories" class="subcategory-item" (click)="selectSubCategory(subcategory)">
-          <p>{{ subcategory.nomSousCategorie }}</p> <!-- Adjust 'nomSousCategorie' to match your SousCategorie model -->
+          <p>{{ subcategory.nomSousCategorie }}</p> <!-- Le champ 'nomSousCategorie' est déjà en français -->
         </div>
       </div>
 
-
-    <div class="mat-elevation-z8">
-  
-      <!-- Conteneur des cartes de formation -->
-      <div class="formations-container" id="courses">
-        <mat-card class="example-card" *ngFor="let formation of paginatedFormations">
-          <mat-card-header>
-            <!-- Titre de la formation -->
-            <mat-card-title>{{ formation.nomFormation }}</mat-card-title>
-            <!-- Sous-titre avec le niveau de la formation -->
-            <mat-card-subtitle>Niveau : {{ formation.niveau }}</mat-card-subtitle>
-          </mat-card-header>
-          <!-- Image de la formation -->
-          <img
-            mat-card-image
-            *ngIf="formation?.image"
-            [src]="formation.image"
-            alt="Image de {{ formation.nomFormation }}"
-          />
-          <mat-card-content>
-            <!-- Description de la formation -->
-            <p>{{ formation.description }}</p>
-            <p><strong>Durée :</strong> {{ formation.duree }} mois</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <!-- Bouton pour éditer la formation -->
-            <button *ngIf="isAdmin()" mat-icon-button color="accent" (click)="openEdit(formation.id)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <!-- Bouton pour supprimer la formation -->
-            <button
-  *ngIf="isAdmin()"
-  mat-icon-button
-  color="warn"
-  matTooltip="Supprimer la formation"
-  aria-label="Supprimer la formation"
-  (click)="deleteFormation(formation.id)"
->
-  <mat-icon>delete</mat-icon>
-</button>
-
-
-          
-            <div class="wrapper-eye">
-              <button mat-icon-button color="accent"
-              [routerLink]="['/detail-formation', formation.id]"
-                      class="eye-button">
-                <mat-icon>visibility</mat-icon>
+      <div class="mat-elevation-z8">
+        <!-- Conteneur des cartes de formation -->
+        <div class="formations-container" id="courses">
+          <mat-card class="example-card" *ngFor="let formation of paginatedFormations">
+            <mat-card-header>
+              <!-- Titre de la formation -->
+              <mat-card-title>{{ formation.nomFormation }}</mat-card-title>
+              <!-- Sous-titre avec le niveau de la formation -->
+              <mat-card-subtitle>Niveau : {{ formation.niveau }}</mat-card-subtitle>
+            </mat-card-header>
+            <!-- Image de la formation -->
+            <img
+              mat-card-image
+              *ngIf="formation?.image"
+              [src]="formation.image"
+              [alt]="'Image de ' + formation.nomFormation"
+            />
+            <mat-card-content>
+              <!-- Description de la formation -->
+              <p>{{ formation.description }}</p>
+              <p><strong>Durée :</strong> {{ formation.duree }} mois</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- Bouton pour éditer la formation -->
+              <button *ngIf="isAdmin()" mat-icon-button color="accent" (click)="openEdit(formation.id)"
+                matTooltip="Modifier la formation" aria-label="Modifier la formation">
+                <mat-icon>edit</mat-icon>
               </button>
-              <div class="alert-message">Voir les détails</div>
-            </div>
-            
+              <!-- Bouton pour supprimer la formation -->
+              <button
+                *ngIf="isAdmin()"
+                mat-icon-button
+                color="warn"
+                matTooltip="Supprimer la formation"
+                aria-label="Supprimer la formation"
+                (click)="deleteFormation(formation.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
 
+              <div class="wrapper-eye">
+                <button mat-icon-button color="accent"
+                  [routerLink]="['/detail-formation', formation.id]"
+                  class="eye-button">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <div class="alert-message">Voir les détails</div>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
 
-
-            
-          </mat-card-actions>
-        </mat-card>
+        <!-- Paginateur -->
+        <mat-paginator
+          [length]="dataSource.length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="updatePaginatedFormations()"
+          aria-label="Sélectionner la page"
+        >
+        </mat-paginator>
       </div>
-
-      <!-- Paginator -->
-      <mat-paginator
-        [length]="dataSource.length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="updatePaginatedFormations()"
-        aria-label="Select page"
-      >
-      </mat-paginator>
     </div>
-
-
-
+  </div>
 </div>
-
-

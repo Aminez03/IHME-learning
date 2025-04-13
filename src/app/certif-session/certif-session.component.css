@@ -1,79 +1,395 @@
+/* Certificate Container */
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 80px;
+  margin-left: 300px;
+}
 .certif-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    min-height: 80vh;
-    background-color: #f7f9fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 80vh;
+  background-color: #f7f9fc;
+  transition: background-color 0.3s ease;
+}
+
+.dark-mode .certif-container {
+  background-color: #121212;
+}
+
+/* Certificate Card */
+.certif-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .certif-card {
+  background: #1e1e1e;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+.certif-header {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.certif-badge {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.certif-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.dark-mode .certif-header h1 {
+  color: #e0e0e0;
+}
+
+.certif-ribbon {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c);
+  z-index: 1;
+}
+
+/* Body */
+.certif-body {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.certif-presented {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.dark-mode .certif-presented {
+  color: #bdc3c7;
+}
+
+.candidate-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.dark-mode .candidate-name {
+  color: #ffffff;
+  background: rgba(52, 152, 219, 0.2);
+}
+
+.certif-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3498db, transparent);
+}
+
+.dark-mode .divider-line {
+  background: linear-gradient(90deg, transparent, #9b59b6, transparent);
+}
+
+.divider-icon {
+  margin: 0 1rem;
+  font-size: 1.5rem;
+}
+
+.certif-for {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.certif-card h2 {
+  font-size: 1.8rem;
+  color: #3498db;
+  margin: 1rem 0 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.dark-mode .certif-card h2 {
+  color: #9b59b6;
+}
+
+/* Seal */
+.certif-seal {
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 100px;
+  background: #e74c3c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.2;
+  transition: all 0.3s ease;
+}
+
+.certif-card:hover .certif-seal {
+  opacity: 0.8;
+  right: -20px;
+}
+
+.seal-inner {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  transform: rotate(-15deg);
+}
+
+/* Details */
+.certif-details {
+  margin: 2rem 0;
+  text-align: left;
+  background: rgba(241, 242, 246, 0.5);
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.dark-mode .certif-details {
+  background: rgba(30, 30, 30, 0.7);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.dark-mode .detail-item {
+  color: #e0e0e0;
+}
+
+.detail-item mat-icon {
+  margin-right: 0.8rem;
+  color: #3498db;
+  font-size: 1.2rem;
+  width: auto;
+  height: auto;
+}
+
+.dark-mode .detail-item mat-icon {
+  color: #9b59b6;
+}
+
+/* Actions */
+.certif-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.certif-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.certif-actions button mat-icon {
+  font-size: 1.2rem;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loading-content p {
+  color: #7f8c8d;
+  font-size: 1.2rem;
+}
+
+.dark-mode .loading-content p {
+  color: #bdc3c7;
+}
+
+.error-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .error-content {
+  background: #1e1e1e;
+}
+
+.error-icon {
+  font-size: 3rem;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+}
+
+.error-content h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.dark-mode .error-content h3 {
+  color: #e0e0e0;
+}
+
+.error-content p {
+  color: #7f8c8d;
+  margin-bottom: 1.5rem;
+}
+
+.dark-mode .error-content p {
+  color: #bdc3c7;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .certif-card {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    padding: 2rem 3rem;
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-    animation: fadeIn 0.5s ease-in-out;
+    padding: 2rem 1.5rem;
   }
   
-  .certif-card h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #2c3e50;
+  .certif-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .candidate-name {
+    font-size: 1.5rem;
   }
   
   .certif-card h2 {
-    font-size: 1.4rem;
-    color: #3498db;
-    margin: 1rem 0;
+    font-size: 1.5rem;
   }
   
-  .certif-card p {
-    font-size: 1rem;
-    color: #555;
-    margin: 0.5rem 0;
+  .certif-seal {
+    width: 80px;
+    height: 80px;
+    right: -40px;
   }
   
-  .certif-details {
-    margin-top: 1.5rem;
-    text-align: left;
+  .seal-inner {
+    width: 60px;
+    height: 60px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .certif-container {
+    padding: 1rem;
   }
   
-  .certif-card button {
-    margin-top: 2rem;
-    background-color: #3498db;
-    border: none;
-    color: white;
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  .certif-actions {
+    flex-direction: column;
+    gap: 0.8rem;
   }
   
-  .certif-card button:hover {
-    background-color: #2c80b4;
+  .certif-actions button {
+    width: 100%;
   }
   
-  .loading-message {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 5rem;
-    color: #888;
+  .certif-seal {
+    display: none;
   }
-  
-  .error-message {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 5rem;
-    color: #e74c3c;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
+}
+.breadcrumb a {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumb a + a::before {
+  content: '/';
+  color: #999;
+  padding: 0 8px;
+}

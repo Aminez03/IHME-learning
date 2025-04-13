@@ -5,6 +5,48 @@
 <app-sidebar></app-sidebar>
 
 <div class="content">
+
+
+  <div class="header">
+    <mat-card-actions class="breadcrumb">
+  
+      <a mat-button color="primary" routerLink="/formations">
+        Accueil
+      </a>
+  
+      <a *ngIf="Categorie" mat-button color="primary" [routerLink]="['/formations', Categorie.nomCategorie]">
+       
+        {{ Categorie.nomCategorie }}
+      </a>
+  
+      <a *ngIf="Categorie" mat-button color="primary" [routerLink]="['/formations']">
+        {{ Categorie.nomCategorie }}
+      </a>
+  
+      <a *ngIf="sousCategorie" mat-button color="primary" [routerLink]="['/detail-formation', formation?.id]">
+        {{ sousCategorie.nomSousCategorie }}
+        {{ formation?.nomFormation }}
+      </a>
+  
+      <a *ngIf="session" mat-button color="primary" [routerLink]="['/session', session.id]">
+   
+        Session
+      </a>
+
+
+      <a *ngIf="session" mat-button color="primary" [routerLink]="['/examan', session.id]">
+   
+        Examen
+      </a>
+
+  
+    </mat-card-actions>
+  </div>
+
+
+
+
+
  <div class="exam-container" *ngIf="examen">
   <header class="exam-header">
     <h2 class="exam-title">{{ examen.titre }}</h2>

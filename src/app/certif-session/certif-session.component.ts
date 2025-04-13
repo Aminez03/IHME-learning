@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import { Formation } from 'src/Models/Formation';
+import { CategorieService } from 'src/Services/categorie.service';
 import { CertificatService } from 'src/Services/certificat.service';
 import { FormationService } from 'src/Services/formation.service';
+import { SessionService } from 'src/Services/session.service';
+import { SousCategorieService } from 'src/Services/sous-categorie.service';
 
 @Component({
   selector: 'app-certif-session',
@@ -12,22 +15,33 @@ import { FormationService } from 'src/Services/formation.service';
 })
 export class CertifSessionComponent implements OnInit {
   formation?: Formation;
-  certificat: any = undefined;
-  formationID: any;
 
+  certificat: any ;
+  formationID: any;
+  Categorie: any;
+  sousCategorie: any;
+  session: any; // Declare the session property
+
+  sessionID:any;
   constructor(
     private certificatService: CertificatService,
     private route: ActivatedRoute,
     private FS: FormationService,
-    private router: Router
+    private router: Router,
+
+    private CS: CategorieService,
+    private SCS: SousCategorieService,
+    private sessionService: SessionService // Replace 'any' with the actual type of the service
   ) {}
 
   ngOnInit(): void {
+ 
     this.loadCertificat();
+    
   }
 
   goHome(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/formations']);
   }
 
   isCertificatValide(certificat: any): boolean {
@@ -42,13 +56,17 @@ export class CertifSessionComponent implements OnInit {
       next: (data) => {
         console.log("Certificat reçu :", data);
 
-        if (!this.isCertificatValide(data)) {
-          console.warn('Certificat non valide (échec ou statut invalide).');
-          this.certificat = null;
-          return;
-        }
+        // if (!this.isCertificatValide(data)) {
+        //   console.warn('Certificat non valide (échec ou statut invalide).');
+        //   this.certificat = null;
+        //   return;
+        // }
 
         this.certificat = data;
+        this.sessionID = data.formationSessionID;
+        this.getSessionById(this.sessionID);
+        console.log("Session ID  :", this.sessionID);
+        console.log("Certificat  :", this.certificat);
         this.formationID = data.formation_session.formationID;
         this.fetchFormation();
       },
@@ -59,11 +77,30 @@ export class CertifSessionComponent implements OnInit {
     });
   }
 
+  getSessionById(id: number) {
+    this.sessionService.getById(id).subscribe(
+      (data) => {
+        this.session = data;
+        if (this.session && this.session.formateurID) {
+          this.fetchFormation();
+        } else {
+          console.error('Erreur lors de la récupération de la session :', 'Formateur ID non trouvé');
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la session :', error);
+      }
+    );
+  }
+
+
+
   fetchFormation(): void {
     if (this.formationID) {
       this.FS.getFormationById(this.formationID).subscribe({
         next: (data) => {
           this.formation = data.formation;
+          this.getSousCategorieById(this.formation?.sousCategorieID!);
         },
         error: (err) => {
           console.error('Erreur lors de la récupération de la formation:', err);
@@ -71,6 +108,20 @@ export class CertifSessionComponent implements OnInit {
       });
     }
   }
+
+  getCategorieById(categorieID: number): void {
+    this.CS.getById(categorieID).subscribe((data) => {
+      this.Categorie = data;
+    });
+  }
+
+  getSousCategorieById(SouscategorieID: number): void {
+    this.SCS.getById(SouscategorieID).subscribe((data) => {
+      this.sousCategorie = data;
+      this.getCategorieById(this.sousCategorie?.categorieID!);
+    });
+
+}
 
   generatePDF(): void {
     

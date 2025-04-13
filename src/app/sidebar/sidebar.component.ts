@@ -40,7 +40,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   role: string | null = null;
   private roleSub!: Subscription;
-
   constructor(
     private formationService: FormationService,
     private snackBar: MatSnackBar,

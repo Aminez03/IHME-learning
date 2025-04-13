@@ -5,6 +5,11 @@ import { ExamenService } from 'src/Services/examen.service';
 import { Examen } from 'src/Models/Examen';
 import { Question } from 'src/Models/Question';
 import { Reponse } from 'src/Models/Reponse';
+import { FormationService } from 'src/Services/formation.service';
+import { CategorieService } from 'src/Services/categorie.service';
+import { SousCategorieService } from 'src/Services/sous-categorie.service';
+import { Formation } from 'src/Models/Formation';
+import { SessionService } from 'src/Services/session.service';
 
 @Component({
   selector: 'app-examen',
@@ -26,7 +31,11 @@ export class ExamenComponent implements OnInit, OnDestroy {
   pourcentage = 0;
   certificatCree = false;
   message: string | null = null;
+  session: any; // Replace 'any' with the actual type if available
   certificatid: number | null = null;
+  Categorie: any;
+  sousCategorie: any;
+  formation: Formation | undefined;
 
   // ⏱️ Chronomètre
   timeLeft: number = 1* 60; // 20 minutes en secondes
@@ -36,11 +45,16 @@ export class ExamenComponent implements OnInit, OnDestroy {
     private examenService: ExamenService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
+        private FS: FormationService,
+        private CS: CategorieService,
+        private SCS: SousCategorieService,
     private router: Router,
+    private sessionService: SessionService // Replace 'any' with the actual type of sessionService if available
   ) {}
 
   ngOnInit(): void {
     const sessionId = this.route.snapshot.params['id'];
+    this.getSessionById(sessionId);
     this.loadExamen(sessionId);
     this.fetchAndNavigateToCertif();
   }
@@ -201,4 +215,65 @@ export class ExamenComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+
+
+  getSessionById(id: number) {
+    this.sessionService.getById(id).subscribe(
+      (data) => {
+        this.session = data;
+        if (this.session && this.session.formateurID) {
+        
+          this.getFormationById(this.session.formationID);
+        } else {
+          console.error('Erreur lors de la récupération de la session :', 'Formateur ID non trouvé');
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la session :', error);
+      }
+    );
+  }
+
+  getFormationById(formationID: number): void {
+    this.FS.getFormationById(formationID).subscribe({
+      next: (data) => {
+        console.log('Formation reçue :', data);
+        this.formation = data.formation;
+        this.getSousCategorieById(this.formation?.sousCategorieID!);
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération de la formation :', err);
+        this.errorMessage = 'Impossible de charger la formation';
+      }
+    });
+  }
+  
+
+
+
+  getCategorieById(categorieID: number): void {
+    this.CS.getById(categorieID).subscribe((data) => {
+      this.Categorie = data;
+    });
+  }
+
+  getSousCategorieById(SouscategorieID: number): void {
+    this.SCS.getById(SouscategorieID).subscribe((data) => {
+      this.sousCategorie = data;
+      this.getCategorieById(this.sousCategorie?.categorieID!);
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
 }

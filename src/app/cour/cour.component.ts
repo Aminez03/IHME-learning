@@ -20,9 +20,9 @@ export class CourComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'titre', 'description', 'formationId', 'action'];
   dataSource: Cour[] = [];
   paginatedCours: Cour[] = [];
-  pageSize = 3;
+  pageSize = 4;
   pageIndex = 0;
-  pageSizeOptions: number[] = [3, 6, 9, 12];
+  pageSizeOptions: number[] = [4, 6, 9, 12];
   progression?: SessionProgression;
   progressionValue = 0;
   mode: 'determinate' | 'indeterminate' = 'indeterminate';
@@ -39,6 +39,7 @@ export class CourComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    //progressionValue je peux refresh sur cette valeur 
     this.fetchData();
     const sessionId = this.route.snapshot.params['id'] || localStorage.getItem('formationSessionID');
     this.sessionid=sessionId;
@@ -164,6 +165,7 @@ export class CourComponent implements OnInit, AfterViewInit {
       next: ({ progression }) => {
         this.progression = progression;
         this.calculateProgressionPercentage();
+
         this.mode = 'determinate';
       },
       error: (err) => console.error('Erreur lors du chargement des données de session et progression.', err)
@@ -173,5 +175,6 @@ export class CourComponent implements OnInit, AfterViewInit {
   private calculateProgressionPercentage(): void {
     const totalCourses = this.dataSource.length || 1;
     this.progressionValue = this.progression ? Math.round((this.progression.progression / totalCourses) * 100) : 0;
+  
   }
 }

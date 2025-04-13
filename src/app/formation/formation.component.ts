@@ -20,11 +20,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./formation.component.css']
 })
 export class FormationComponent implements OnInit, AfterViewInit {
+  
   currentSlide = 0;
   carouselImages = [
-    { image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028', caption: 'Learn Anything' },
-    { image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97', caption: 'Master New Skills' },
-    { image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8', caption: 'Grow Your Career' }
+    { image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028', caption: 'Apprenez tout' },
+    { image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97', caption: 'Renforcez vos compétences' },
+    { image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8', caption: 'Développez votre carrière' }
   ];
   displayedColumns: string[] = ['id', 'nomFormation', 'niveau', 'duree', 'action', 'image'];
   dataSource: Formation[] = [];

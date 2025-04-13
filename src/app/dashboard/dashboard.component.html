@@ -1,69 +1,82 @@
-<div class="dashboard-wrapper">
-    <aside class="sidebar">
-      <app-sidebar></app-sidebar>
-    </aside>
-   
-      
-    <main class="main-content">
-      <header class="dashboard-header">
-        <br> <br>
-        <h1 class="welcome-typewriter">📚 Bienvenue sur votre espace de formation en ligne</h1>
-    </header>
-      <section class="info-banner">
-        ⚠️ Rappel : Respectez les règles de la plateforme pour garantir un apprentissage optimal.
+<div class="container" [ngClass]="{ 'dark-mode': isDarkMode }">
+  <app-sidebar></app-sidebar>
 
-      </section>
-      <!-- Règles de la plateforme -->
-      <section class="rules-section">
-        <h2>📜 Règlement de la plateforme</h2>
-        <ul>
-          <li>✅ Respecter les délais des modules et des évaluations.</li>
-          <li>✅ Ne pas partager ses identifiants avec d'autres personnes.</li>
-          <li>✅ Participation active aux sessions et forums recommandée.</li>
-          <li>✅ Toute tentative de triche entraînera une exclusion immédiate.</li>
-          <li>✅ Le contenu est protégé par des droits d’auteur – ne pas redistribuer.</li>
-        </ul>
-      </section>
-  
-     
-  
-      <section class="dashboard-highlights">
-        <div class="highlight-card">
-          <h2>🧠 Astuce du jour</h2>
-          <p>Regarder les vidéos de formation en x1.25 peut améliorer votre concentration sans sacrifier la compréhension.</p>
+  <section class="dashboard-stats">
+    <!-- En-tête -->
+    <div class="dashboard-header">
+      <div>
+        <h2><span class="material-icons">bar_chart</span> Tableau de bord</h2>
+        <p class="subtitle">Aperçu global de votre plateforme e-learning</p>
+      </div>
+      <button (click)="toggleDarkMode()" class="mode-toggle" mat-icon-button>
+        <span class="material-icons">{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</span>
+      </button>
+    </div>
+
+    <!-- Statistiques principales -->
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of stats" [ngClass]="stat.colorClass">
+        <span class="material-icons icon">{{ stat.icon }}</span>
+        <div>
+          <h3>{{ stat.label }}</h3>
+          <p>{{ stat.count }}</p>
         </div>
-        <div class="highlight-card">
-          <h2>📅 Planning recommandé</h2>
-          <ul>
-            <li>Lundi : Suivre un module vidéo</li>
-            <li>Mardi : Quiz & révision</li>
-            <li>Jeudi : Projet pratique</li>
-          </ul>
-        </div>
-      </section>
-  
-      <section class="resources">
-        <h2>🎯 Ressources populaires</h2>
-        <div class="resources-grid">
-          <div class="resource-card">
-            <h3>Formation Angular</h3>
-            <p>Maîtrisez les composants, services et la structure d’un projet Angular moderne.</p>
-          </div>
-          <div class="resource-card">
-            <h3>Python pour débutants</h3>
-            <p>Apprenez les bases de la programmation avec des exercices concrets.</p>
-          </div>
-          <div class="resource-card">
-            <h3>Gestion du temps</h3>
-            <p>Optimisez votre apprentissage grâce à des techniques de productivité.</p>
+      </div>
+    </div>
+
+    <!-- Taux de réussite -->
+    <div class="progress-container">
+      <h3><span class="material-icons">show_chart</span> Taux de réussite global</h3>
+      <canvas id="circleChart" width="120" height="120"></canvas>
+      <p class="progress-description">Amélioration par rapport au mois dernier : <strong>+8%</strong></p>
+    </div>
+
+    <!-- Répartition des utilisateurs (version moderne avec animation) -->
+    <div class="charts-section">
+      <h3><span class="material-icons">group</span> Répartition des utilisateurs</h3>
+      <div class="user-distribution">
+        <div class="bar-container" matTooltip="Formateurs (40%)">
+          <div class="bar formateur" style="height: 80%;">
+            <span>Formateurs</span>
           </div>
         </div>
-      </section>
-  
-      <section class="tip-section">
-        <h2>💡 Conseil</h2>
-        <p>Révisez chaque jour un peu plutôt que tout d’un coup. La régularité améliore la mémorisation !</p>
-      </section>
-    </main>
-  </div>
-  
+        <div class="bar-container" matTooltip="Candidats (30%)">
+          <div class="bar candidat" style="height: 60%;">
+            <span>Candidats</span>
+          </div>
+        </div>
+        <div class="bar-container" matTooltip="Admins (20%)">
+          <div class="bar admin" style="height: 40%;">
+            <span>Admins</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prochaine session -->
+    <div class="next-session-card">
+      <h3><span class="material-icons">event</span> Prochaine formation</h3>
+      <p><strong>Angular Avancé</strong> – 15 avril 2025</p>
+      <p>Formateur : <span class="highlight">Julie Dupont</span></p>
+      <button mat-raised-button color="primary">S'inscrire</button>
+    </div>
+
+    <!-- Astuce du jour améliorée -->
+    <div class="motivation-card">
+      <h3><span class="material-icons">lightbulb</span> Astuce du jour</h3>
+      <blockquote>
+        « La constance bat le talent quand le talent ne travaille pas dur. »
+        <footer>— Coach Motivation</footer>
+      </blockquote>
+    </div>
+
+    <!-- Support -->
+    <div class="support-card">
+      <h3><span class="material-icons">support_agent</span> Assistance</h3>
+      <p>Besoin d’aide ? <br>Contactez-nous à
+        <a href="mailto:support@e-learning.com">support@e-learning.com</a>
+      </p>
+      <button mat-stroked-button color="accent">Centre d’aide</button>
+    </div>
+  </section>
+</div>
