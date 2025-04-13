@@ -1,0 +1,168 @@
+/* Main Structure */
+.sidenav-container {
+  display: flex;
+  min-height: calc(100vh - 64px);
+  margin-top: 64px;
+}
+
+.cours-section {
+  flex: 1;
+
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Detail Card */
+.detail-card {
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.detail-card:hover {
+  transform: translateY(-2px);
+}
+
+.detail-header {
+  padding: 16px;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 4px 4px 0 0;
+}
+
+.detail-header mat-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.detail-content {
+  padding: 20px;
+}
+
+.description {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Video */
+.video-container {
+  margin-top: 20px;
+}
+
+.video-container video {
+  width: 100%;
+  max-height: 500px;
+  border-radius: 4px;
+  background: #000;
+}
+
+/* Back Button */
+.header {
+  margin-bottom: 20px;
+}
+
+/* Progress */
+.progress-card {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.progress-heading {
+  color: #3f51b5;
+  margin-bottom: 20px;
+}
+
+.spinner-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Loading */
+.loading-spinner,
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.loading-spinner p,
+.loading-container p {
+  margin-top: 15px;
+  color: #757575;
+}
+
+/* Error */
+.error-message {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffebee;
+  border-left: 4px solid #f44336;
+  color: #d32f2f;
+  border-radius: 4px;
+}
+
+.error-message mat-icon {
+  margin-right: 10px;
+}
+
+/* Dark Mode */
+.dark-mode .cours-section {
+  background-color: #333;
+}
+
+.dark-mode .content,
+.dark-mode .detail-card,
+.dark-mode .progress-card {
+  background-color: #424242;
+  color: #e0e0e0;
+}
+
+.dark-mode .detail-header {
+  background-color: #1e88e5;
+}
+
+.dark-mode .error-message {
+  background-color: #3d1a1a;
+  color: #ff8a80;
+  border-left-color: #ff5252;
+}
+
+.dark-mode .loading-spinner p,
+.dark-mode .loading-container p {
+  color: #bdbdbd;
+}
+
+.breadcrumb a {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumb a + a::before {
+  content: '/';
+  color: #999;
+  padding: 0 8px;
+}

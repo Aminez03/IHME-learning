@@ -1,0 +1,285 @@
+/* ========== Conteneur principal ========== */
+.container {
+  display: flex;
+  min-height: 100vh;
+  margin-top: 64px; /* Correspond à la barre de navigation */
+}
+
+/* ========== Contenu principal ========== */
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ========== Carte de session ========== */
+.session-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.session-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.session-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icon-title {
+  margin-right: 10px;
+  color: #3f51b5;
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.session-table tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.session-table td {
+  padding: 12px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.session-table td:first-child {
+  font-weight: 600;
+  color: #333;
+}
+
+.session-table .icon {
+  margin-right: 8px;
+  vertical-align: middle;
+  color: #3f51b5;
+}
+
+/* ========== Carte des candidats ========== */
+.candidat-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: box-shadow 0 your content here3s ease;
+}
+
+.candidat-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.candidat-card .text-center {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.candidat-card mat-icon {
+  margin-right: 10px;
+  color: #3f51b5;
+}
+
+/* ========== Carte des cours (app-cour) ========== */
+.cours-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.cours-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cours-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* ========== Tableau générique (candidats et cours) ========== */
+table.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+th.mat-header-cell {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 600;
+}
+
+td.mat-cell {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mat-row:hover {
+  background-color: #f5f5f5;
+}
+
+.mat-badge {
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+/* ========== Boutons d'action ========== */
+mat-card-actions button {
+  transition: transform 0.2s ease;
+}
+
+mat-card-actions button:hover {
+  transform: scale(1.1);
+}
+
+.block-btn {
+  color: #ef5350; /* Rouge pour l'action de blocage */
+}
+
+/* ========== Alertes ========== */
+.alert {
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.alert-danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.alert-info {
+  background-color: #e0f2fe;
+  color: #1e40af;
+}
+
+.alert mat-icon {
+  margin-right: 10px;
+}
+
+/* ========== Bouton "Retour" ========== */
+mat-card-actions button.mat-raised-button {
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+mat-card-actions button.mat-raised-button:hover {
+  background-color: #1e88e5;
+}
+
+/* ========== Mode sombre ========== */
+.dark-mode .content {
+  background-color: #333;
+}
+
+.dark-mode .session-card,
+.dark-mode .candidat-card,
+.dark-mode .cours-card {
+  background-color: #444;
+  color: #ddd;
+}
+
+.dark-mode th.mat-header-cell {
+  background-color: #1e88e5;
+}
+
+.dark-mode td.mat-cell {
+  color: #ddd;
+  border-bottom: 1px solid #666;
+}
+
+.dark-mode .mat-row:hover {
+  background-color: #555;
+}
+
+.dark-mode .alert-danger {
+  background-color: #7f1d1d;
+  color: #f87171;
+}
+
+.dark-mode .alert-info {
+  background-color: #1e3a8a;
+  color: #60a5fa;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .content {
+    padding: 15px;
+  }
+  .session-table td {
+    font-size: 0.9rem;
+  }
+  table.mat-table {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .session-table tr {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+  }
+  .session-table td {
+    padding: 8px;
+  }
+  table.mat-table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.breadcrumb a {
+  position: relative;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumb a + a::before {
+  content: '/';
+  color: #999;
+  padding: 0 8px;
+}

@@ -1,0 +1,145 @@
+<div class="container">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Conteneur principal -->
+  <div class="content">
+    <mat-card class="detail-card">
+      <!-- Header with Navigation Back -->
+      <div class="header">
+        <mat-card-actions class="breadcrumb">
+      
+          <a mat-button color="primary" routerLink="/formations">
+            Accueil
+          </a>
+      
+          <a *ngIf="Categorie" mat-button color="primary" [routerLink]="['/formations']">
+            {{ Categorie.nomCategorie }}
+          </a>
+      
+          <a *ngIf="sousCategorie" mat-button color="primary" [routerLink]="['/formations']">
+            {{ sousCategorie.nomSousCategorie }}
+          </a>
+      
+          <a *ngIf="formation" mat-button color="primary" [routerLink]="['/detail-formation', formation.id]" disabled="!formation">
+            {{ formation.nomFormation }}
+          </a>
+      
+        </mat-card-actions>
+      </div>
+
+      <!-- Formation Information -->
+      <mat-card-header>
+        <div class="header-content">
+          <img *ngIf="formation?.image" 
+            [src]="formation?.image" 
+            alt="Image de {{ formation?.nomFormation }}" 
+            class="formation-image">
+          <div>
+            <mat-card-title>{{ formation?.nomFormation }}</mat-card-title>
+            <mat-card-subtitle>Niveau : {{ formation?.niveau }}</mat-card-subtitle>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><strong>Description :</strong> {{ formation?.description }}</p>
+        <p><strong>Durée :</strong> {{ formation?.duree }} mois</p>
+
+        <h3>Sessions disponibles :</h3>
+        <button *ngIf="isAdmin()" mat-raised-button color="primary" (click)="open()" matTooltip="Ajouter Session"
+        aria-label="Ajouter Session">
+          <mat-icon>add</mat-icon> Ajouter session
+        </button>
+
+        <table mat-table [dataSource]="sessions" class="mat-elevation-z8">
+          <!-- Table columns -->
+          <ng-container matColumnDef="dateDebut">
+            <th mat-header-cell *matHeaderCellDef> Date de début </th>
+            <td mat-cell *matCellDef="let session"> {{ session.dateDebut | date:'dd/MM/yyyy' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dateFin">
+            <th mat-header-cell *matHeaderCellDef> Date de fin </th>
+            <td mat-cell *matCellDef="let session"> {{ session.dateFin | date:'dd/MM/yyyy' }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="statut">
+            <th mat-header-cell *matHeaderCellDef> Statut </th>
+            <td mat-cell *matCellDef="let session"> {{ session.statut }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="capacite">
+            <th mat-header-cell *matHeaderCellDef> Capacité </th>
+            <td mat-cell *matCellDef="let session"> {{ session.capacite }} places </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombreInscrits">
+            <th mat-header-cell *matHeaderCellDef> Inscrits </th>
+            <td mat-cell *matCellDef="let session"> {{ session.nombreInscrits }} </td>
+          </ng-container>
+          <ng-container matColumnDef="nombreCours">
+            <th mat-header-cell *matHeaderCellDef> Cours </th>
+            <td mat-cell *matCellDef="let session"> {{ session.nombreCours }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="formateurID">
+            <th mat-header-cell *matHeaderCellDef> Formateur </th>
+            <td mat-cell *matCellDef="let session">
+              <span *ngIf="formateurs && formateurs[session.formateurID]">
+                {{ formateurs[session.formateurID]?.user.nom ?? 'Chargement...' }}
+              </span>
+              <span *ngIf="!formateurs[session.formateurID]">Chargement...</span>
+            </td>
+          </ng-container>
+          
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let session">
+              <!-- <button mat-icon-button color="primary" (click)="inscrire(session.id)" *ngIf="iscandidat()" *ngIf="!isInscrit()">
+                <mat-icon>person_add</mat-icon>
+              </button> -->
+
+              <button mat-icon-button color="primary" 
+              matTooltip="inscrire dans la session"
+        (click)="inscrire(session.id)" 
+        [disabled]="!iscandidat() || !isInscrit()">
+      <mat-icon>how_to_reg</mat-icon>
+      </button>
+
+              <button mat-icon-button color="accent" [routerLink]="['/session', session.id]"
+              
+              [disabled]="isInscrit()" matTooltip="Voir Session"
+              aria-label="Voir Session">
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+
+          
+            
+              
+
+              <button *ngIf="isAdmin()" mat-icon-button color="accent" (click)="openEdit(session.id) "  matTooltip="Modifier Session"
+              aria-label="Modifier Session">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button *ngIf="isAdmin()" mat-icon-button color="warn" (click)="deleteSession(session.id) " matTooltip="Supprimer Session"
+              aria-label="Supprimer Session">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- No sessions text -->
+        <ng-template #noSessions>
+          <p class="no-session-text">Aucune session disponible pour cette formation.</p>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

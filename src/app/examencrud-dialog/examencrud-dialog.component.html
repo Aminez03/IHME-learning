@@ -1,0 +1,50 @@
+<div class="dialog-form">
+    <h2 mat-dialog-title>{{ data ? 'Modifier' : 'Ajouter' }} Examen</h2>
+    <form [formGroup]="examenForm" (ngSubmit)="onSubmit()" mat-dialog-content>
+      <br>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="titre" placeholder="Entrez le titre de l'examen" />
+        <mat-icon matPrefix>title</mat-icon>
+        <mat-error *ngIf="examenForm.get('titre')?.hasError('required')">
+          Le titre est requis
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre de questions</mat-label>
+        <input type="number" matInput formControlName="nombreQuestion" placeholder="Nombre de questions" />
+        <mat-icon matPrefix>help_outline</mat-icon>
+        <mat-error *ngIf="examenForm.get('nombreQuestion')?.hasError('required')">
+          Le nombre de questions est requis
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Durée (en minutes)</mat-label>
+        <input type="number" matInput formControlName="duree" placeholder="Durée en minutes" />
+        <mat-icon matPrefix>timer</mat-icon>
+        <mat-error *ngIf="examenForm.get('duree')?.hasError('required')">
+          La durée est requise
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>ID Formation Session</mat-label>
+        <input type="number" matInput formControlName="formationSessionID" placeholder="ID de la session" />
+        <mat-icon matPrefix>school</mat-icon>
+        <mat-error *ngIf="examenForm.get('formationSessionID')?.hasError('required')">
+          L'ID de la session est requis
+        </mat-error>
+      </mat-form-field>
+  
+      <div mat-dialog-actions class="dialog-buttons">
+        <button mat-stroked-button class="cancel-button" (click)="onCancel()">
+          Annuler
+        </button>
+        <button mat-stroked-button class="validate-button" type="submit" [disabled]="examenForm.invalid">
+          <mat-icon>check</mat-icon> Valider
+        </button>
+      </div>
+    </form>
+  </div>

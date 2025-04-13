@@ -1,0 +1,221 @@
+/* Conteneur principal avec sidebar */
+.sidenav-container {
+  display: flex;
+  min-height: 100vh;
+  margin-top: 64px; /* Ajustement pour la barre de navigation fixe */
+  transition: margin-left 0.3s ease-in-out; /* Transition fluide pour la sidebar */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 64px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px 0; /* Espacement interne pour le contenu */
+  z-index: 100; /* Assurer qu'elle soit toujours au-dessus */
+  transition: width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 270px; /* Agrandir légèrement au survol */
+  padding: 20px 10px;
+}
+
+/* Section contact */
+.contact {
+  flex: 1;
+  margin-left: 100px; /* Correspond à la largeur de la sidebar */
+  padding: 40px 30px; /* Ajout d'un peu plus d'espace intérieur */
+  background-color: #f8f9fa;
+  transition: margin-left 0.3s ease-in-out; /* Transition lors de la réduction de la sidebar */
+}
+
+/* Conteneur de la page */
+.container {
+  max-width: 800px;
+  margin-left: 50px;
+  background: #ffffff;
+  border-radius: 15px; /* Coins plus arrondis */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+/* Typographie */
+h2 {
+  color: #343a40;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #007bff;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+/* Formulaire */
+.form-material {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+button {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #0056b3;
+}
+
+/* Cartes */
+.mat-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Liens */
+a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Snackbar */
+.custom-snackbar {
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+}
+
+.custom-snackbar-error {
+  background-color: #f44336;
+  color: white;
+  font-size: 16px;
+}
+
+/* Mode sombre */
+.dark-mode .contact {
+  background-color: #333;
+}
+
+.dark-mode .container {
+  background-color: #444;
+  color: #ddd;
+}
+
+.dark-mode h2 {
+  color: #66b0ff;
+}
+
+.dark-mode .mat-form-field {
+  color: #ddd;
+}
+
+.dark-mode .mat-card {
+  background-color: #555;
+  color: #ddd;
+}
+
+.dark-mode h3 {
+  color: #66b0ff;
+}
+
+.dark-mode p {
+  color: #bbb;
+}
+
+.dark-mode a {
+  color: #66b0ff;
+}
+
+/* Design responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    left: -250px; /* Cache la sidebar sur les petits écrans */
+  }
+
+  .contact {
+    margin-left: 0;
+    padding: 20px 10px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mat-card {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+/* Amélioration de l'interface tactile */
+button:active, .mat-card:active {
+  transform: scale(0.98);
+}

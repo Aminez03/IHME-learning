@@ -1,0 +1,31 @@
+<!-- reponse-dialog.component.html -->
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<form [formGroup]="reponseForm" (ngSubmit)="save()" class="dialog-form">
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Texte</mat-label>
+    <input matInput formControlName="texte" placeholder="Entrez le texte de la réponse">
+    <mat-error *ngIf="reponseForm.get('texte')?.hasError('required')">
+      Le texte est requis
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Statut</mat-label>
+    <mat-select formControlName="statut">
+      <mat-option [value]="true">Correcte</mat-option>
+      <mat-option [value]="false">Incorrecte</mat-option>
+    </mat-select>
+    <mat-error *ngIf="reponseForm.get('statut')?.hasError('required')">
+      Le statut est requis
+    </mat-error>
+  </mat-form-field>
+
+  <div class="dialog-buttons">
+    <button mat-stroked-button type="button" (click)="close()" class="cancel-button">
+      Annuler
+    </button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!reponseForm.valid">
+      {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+    </button>
+  </div>
+</form>

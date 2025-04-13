@@ -1,0 +1,356 @@
+/* ========== Global Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== Conteneur principal ========== */
+.sidenav-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ========== Sidebar ========== */
+.sidebar {
+  width: 250px;
+  background: #ffffff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  height: 100%;
+  z-index: 1000;
+}
+
+app-sidebar profile-menu {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  width: 220px;
+  z-index: 1001;
+  animation: slideIn 0.2s ease-out;
+}
+
+/* ========== Contenu principal ========== */
+.cours-section {
+width: 400px;
+  flex: 1;
+  padding: 24px;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+/* ========== Contenu interne ========== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+
+}
+
+.content:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== En-tête ========== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header h2 {
+  font-size: 1.5rem;
+  color: #3f51b5;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ========== Grille des cours ========== */
+.cours-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* ========== Carte cours ========== */
+.cours-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.cours-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cours-card mat-card-header {
+  background-color: #3f51b5;
+  color: #ffffff;
+  padding: 16px;
+}
+
+.cours-card-body {
+  padding: 16px;
+  flex-grow: 1;
+}
+
+.cours-card-body p {
+  color: #424242;
+  line-height: 1.5;
+}
+
+/* ========== Vidéo ========== */
+.video-container {
+  padding: 16px;
+}
+
+.video-container video {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* ========== Boutons ========== */
+mat-card-actions {
+  padding: 8px 16px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+mat-card-actions button {
+  transition: background-color 0.2s ease;
+}
+
+/* ========== Texte "Aucun cours" ========== */
+.no-cours-text {
+  color: #757575;
+  text-align: center;
+  padding: 24px;
+  font-size: 1rem;
+}
+
+/* ========== Paginator ========== */
+mat-paginator {
+  margin-top: 24px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+/* ========== Bouton "Ajouter un Cours" ========== */
+button.mat-raised-button {
+  font-size: 0.875rem;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button.mat-raised-button mat-icon {
+  font-size: 20px;
+}
+
+/* ========== Tooltip ========== */
+.wrapper-eye {
+  position: relative;
+}
+
+.wrapper-eye .alert-message {
+  visibility: hidden;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.wrapper-eye:hover .alert-message {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ========== Progress ========== */
+.progress-card {
+
+  padding: 24px;
+  text-align: center;
+}
+
+.progress-heading {
+  color: #3f51b5;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.spinner-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 5px;
+}
+
+/* ========== Loading ========== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+}
+
+.loading-container p {
+  color: #757575;
+}
+
+/* ========== Mode sombre ========== */
+@media (prefers-color-scheme: dark) {
+  .cours-section {
+    background-color: #1e1e1e;
+  }
+
+  .content,
+  .cours-card {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+  }
+
+  .cours-card mat-card-header {
+    background-color: #1e88e5;
+  }
+
+  .cours-card-body p {
+    color: #e0e0e0;
+  }
+
+  mat-card-actions {
+    background-color: #333333;
+    border-top: 1px solid #444444;
+  }
+
+  .no-cours-text {
+    color: #aaaaaa;
+  }
+
+  mat-paginator {
+    background-color: #333333;
+    color: #e0e0e0;
+  }
+
+  .progress-heading {
+    color: #90caf9;
+  }
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .cours-section {
+    margin-left: 200px;
+  }
+
+  .cours-container {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .video-container video {
+    height: 160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .cours-section {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.button-container:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+button[mat-raised-button] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #e91e63; /* Ajustez selon votre couleur accent */
+  transform: scale(1.05);
+}
+
+button[mat-raised-button] mat-icon {
+  font-size: 20px;
+}

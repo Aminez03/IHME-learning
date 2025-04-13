@@ -1,0 +1,84 @@
+<div class="register-container">
+  <!-- Image Section -->
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="register-image">
+      <img src="assets/images/register.png" alt="e-learning-register">
+  </div>
+
+  <!-- Registration Form -->
+  <div class="register-form">
+      <h2>Créez un compte</h2>
+      <p>Inscrivez-vous pour accéder à la plateforme</p>    
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+          <div class="form-grid">
+              <!-- Nom et Prénom (Toujours sur la même ligne) -->
+              <div class="form-row">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Nom</mat-label>
+                      <input matInput formControlName="nom" type="text">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                      <mat-label>Prénom</mat-label>
+                      <input matInput formControlName="prenom" type="text">
+                  </mat-form-field>
+              </div>
+
+              <!-- Autres champs (Empilés verticalement) -->
+              <mat-form-field appearance="outline">
+                  <mat-label>Date de Naissance</mat-label>
+                  <input matInput formControlName="dateNaissance" type="date">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Numéro Téléphone</mat-label>
+                  <input matInput formControlName="numeroTelephone" type="text">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Adresse</mat-label>
+                  <input matInput formControlName="adresse" type="text">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Adresse Mail</mat-label>
+                  <input matInput formControlName="adresseMail" type="email">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Mot de passe</mat-label>
+                  <input matInput formControlName="password" type="password">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Confirmez le mot de passe</mat-label>
+                  <input matInput formControlName="password_confirmation" type="password">
+              </mat-form-field>
+
+              <!-- Role Selection -->
+              <mat-form-field appearance="outline">
+                  <mat-label>Rôle</mat-label>
+                  <mat-select formControlName="role">
+                      <mat-option value="formateur">Formateur</mat-option>
+                      <mat-option value="candidat">Candidat</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Avatar (optional)</mat-label>
+                  <input matInput formControlName="avatar" type="text">
+              </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary" class="register-btn">
+              <mat-progress-spinner *ngIf="loading" diameter="20" mode="indeterminate"></mat-progress-spinner>
+              S'inscrire
+          </button>
+      </form>
+
+      <!-- Login Link -->
+      <p class="login-text">Vous avez déjà un compte ? 
+          <a routerLink="/login" class="login-link">Connectez-vous</a>
+      </p>
+  </div>
+</div>

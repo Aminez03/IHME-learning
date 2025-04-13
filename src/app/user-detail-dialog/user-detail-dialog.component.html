@@ -1,0 +1,32 @@
+<mat-card class="user-detail-card">
+    <mat-card-header>
+        <div class="user-avatar">
+            <img *ngIf="data.avatar; else defaultAvatar" [src]="data.avatar" alt="Avatar" class="avatar-img">
+            <ng-template #defaultAvatar>
+              <mat-icon>account_circle</mat-icon>
+            </ng-template>
+          </div>
+
+
+      <mat-card-title>{{ data.nom }} {{ data.prenom }}</mat-card-title>
+
+
+
+      <mat-card-subtitle>{{data.role}}</mat-card-subtitle>
+    </mat-card-header>
+  
+    <mat-divider></mat-divider>
+  
+    <mat-card-content>
+      <div class="info-group">
+
+        <p><strong>Email :</strong> {{ data.adresseMail }}</p>
+        <p><strong>Téléphone :</strong> {{ data.numeroTelephone }}</p>
+        <p><strong>Adresse :</strong> {{ data.adresse }}</p>
+        <p><strong>Date de naissance :</strong> {{ data.dateNaissance | date }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="actions">
+    <button mat-button (click)="onClose()">Fermer</button>
+  </div>

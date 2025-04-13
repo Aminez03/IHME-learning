@@ -1,0 +1,41 @@
+.certificate-container {
+    font-family: 'Times New Roman', serif;
+    padding: 2rem;
+  }
+  
+  .certificate {
+    max-width: 900px;
+    border: 8px double #2c3e50;
+    border-radius: 16px;
+    background: #fffdf5;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .certificate:hover {
+    transform: scale(1.01);
+  }
+  
+  .certificate-title {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    letter-spacing: 1px;
+  }
+  
+  .certificate-name {
+    font-size: 1.8rem;
+    color: #1d3557;
+  }
+  
+  .formation-title {
+    font-size: 1.3rem;
+    color: #333;
+  }
+  
+  .statut-badge {
+    font-size: 0.95rem;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-weight: 500;
+  }
+  

@@ -1,0 +1,45 @@
+<!-- question-dialog.component.html -->
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<form [formGroup]="questionForm" (ngSubmit)="save()" class="dialog-form">
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Titre</mat-label>
+    <input matInput formControlName="titre" placeholder="Entrez le titre de la question">
+    <mat-error *ngIf="questionForm.get('titre')?.hasError('required')">
+      Le titre est requis
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>{{questionForm.get('type')?.value}} type</mat-label>
+    <mat-select formControlName="type">
+
+      <mat-option value="multiple">Multiple (QCM)</mat-option>
+      <mat-option value="Seule réponse">Seule</mat-option>
+    </mat-select>
+    <mat-error *ngIf="questionForm.get('type')?.hasError('required')">
+      Le type est requis
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Note</mat-label>
+    <input type="number" matInput formControlName="note" placeholder="Points" min="1">
+    <mat-error *ngIf="questionForm.get('note')?.hasError('required')">
+      La note est requise
+    </mat-error>
+    <mat-error *ngIf="questionForm.get('note')?.hasError('min')">
+      La note doit être supérieure à 0
+    </mat-error>
+  </mat-form-field>
+
+
+
+  <div class="dialog-buttons">
+    <button mat-stroked-button type="button" (click)="close()" class="cancel-button">
+      Annuler
+    </button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!questionForm.valid">
+      {{ isEditMode ? 'Modifier' : 'Ajouter' }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,48 @@
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.form-title {
+  margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.upload-section {
+  margin: 16px 0;
+}
+
+.upload-label {
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.image-preview {
+  margin: 16px 0;
+  text-align: center;
+}
+
+.preview-img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.action-buttons {
+ 
+    padding: 0 24px 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  
+  }

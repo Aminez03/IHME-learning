@@ -1,0 +1,72 @@
+
+
+
+
+<div class="dialog-container">
+
+
+
+
+  <h2 mat-dialog-title>Modifier le profil</h2>
+  <br>
+  <mat-dialog-content>
+    <form class="edit-form" (ngSubmit)="save()">
+
+<!-- Champ pour uploader une image -->
+<input type="file" name="avatarFile" accept="image/*" (change)="uploadImage($event)">
+
+<!-- Affichage de l'image après upload -->
+<div *ngIf="imageURL || user.avatar">
+<h3>Image actuelle :</h3>
+<img [src]="imageURL || user.avatar" alt="Image de profil" width="200">
+</div>
+
+<mat-form-field>
+<mat-label>Image URL</mat-label>
+<input matInput [(ngModel)]="user.avatar" name="avatar">
+</mat-form-field>
+
+
+
+
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nom</mat-label>
+          <input matInput [(ngModel)]="user.nom" name="nom" placeholder="Entrez votre nom">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Prénom</mat-label>
+          <input matInput [(ngModel)]="user.prenom" name="prenom" placeholder="Entrez votre prénom">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="user.adresseMail" name="adresseMail" type="email" placeholder="Entrez votre email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Numéro Téléphone</mat-label>
+        <input matInput [(ngModel)]="user.numeroTelephone" name="numeroTelephone" type="tel" placeholder="Entrez votre numéro">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Adresse</mat-label>
+        <input matInput [(ngModel)]="user.adresse" name="adresse" placeholder="Entrez votre adresse">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Date de Naissance</mat-label>
+        <input matInput [(ngModel)]="user.dateNaissance" name="dateNaissance" type="date">
+      </mat-form-field>
+      
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-button class="cancel-button" (click)="close()">Annuler</button>
+    <button mat-raised-button class="save-button" (click)="save()">Sauvegarder</button>
+  </mat-dialog-actions>
+</div>

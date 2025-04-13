@@ -1,0 +1,215 @@
+/* Profil Container */
+.profile-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+/* Carte Profil */
+.profile-card {
+  background: #f5f5f5;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Ombre légère pour une profondeur */
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-card:hover {
+  transform: translateY(-6px); /* Subtle hover effect */
+}
+
+/* Entête du Profil */
+.profile-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+/* Avatar */
+.avatar-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid #1976D2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Ombre légère */
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(21, 101, 192, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.avatar-container:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-overlay i {
+  color: white;
+  font-size: 26px;
+}
+
+/* Informations du Profil */
+.profile-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2.profile-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px; /* Coins arrondis pour une touche moderne */
+  padding: 12px 18px;
+  font-size: 16px;
+  color: #444;
+  transition: background 0.3s ease;
+}
+
+.info-item:hover {
+  background: #f9f9f9; /* Effet au survol */
+}
+
+.info-item i {
+  color: #1976D2;
+  margin-right: 10px;
+  font-size: 22px;
+}
+
+.info-item span {
+  flex: 1;
+  text-align: left;
+}
+
+mat-divider {
+  margin: 25px 0;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Groupe de Boutons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.edit-button,
+.save-button,
+.back-button {
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.edit-button {
+  background-color: #1976D2;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #1565C0;
+  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+  transform: scale(1.05); /* Effet de survol plus léger */
+}
+
+.save-button {
+  background-color: #C62828;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #B71C1C;
+  box-shadow: 0 4px 15px rgba(198, 40, 40, 0.3);
+  transform: scale(1.05);
+}
+
+.back-button {
+  background-color: #9E9E9E;
+  color: white;
+}
+
+.back-button:hover {
+  background-color: #757575;
+  box-shadow: 0 4px 15px rgba(158, 158, 158, 0.3);
+  transform: scale(1.05);
+}
+
+/* Responsivité */
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 0 10px;
+  }
+
+  .profile-card {
+    padding: 20px;
+  }
+
+  .avatar-container {
+    width: 90px;
+    height: 90px;
+  }
+
+  h2.profile-name {
+    font-size: 20px;
+  }
+
+  .info-item {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .info-item i {
+    font-size: 18px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .edit-button,
+  .save-button,
+  .back-button {
+    width: 100%;
+  }
+}

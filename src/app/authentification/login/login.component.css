@@ -1,0 +1,144 @@
+/* Login Container */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #eef2f3, #dbe6f6); /* Soft gradient background */
+  gap: 80px; /* Adjusted spacing */
+}
+
+/* Image Section */
+.login-image img {
+  max-width: 100%;
+  width: 480px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.login-image img:hover {
+  transform: scale(1.05); /* Subtle hover effect */
+}
+
+/* Form Container */
+/* Formulaire de connexion */
+.login-form {
+  flex: 1;
+  max-width: 420px;
+  background: white;
+  padding: 30px 45px;
+  border-radius: 12px; /* Coins arrondis pour un effet plus doux */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Ombre subtile pour donner de la profondeur */
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacement pour aérer le contenu */
+  max-height: 650px; /* Limiter la hauteur du formulaire */
+}
+
+/* Hover effect sur le formulaire pour attirer l'attention */
+.login-form:hover {
+  transform: translateY(-5px); /* Effet de léger survol pour attirer l'attention */
+}
+
+/* Titre du formulaire */
+h2 {
+  font-size: 26px; /* Taille du texte plus grande pour le titre */
+  font-weight: 600; /* Police plus épaisse pour le titre */
+  color: #2c3e50; /* Couleur sombre pour le titre */
+  margin-bottom: 15px; /* Espacement sous le titre */
+  text-transform: uppercase; /* Mettre le titre en majuscules */
+}
+
+/* Texte d'instruction sous le titre */
+p {
+  color: #7f8c8d; /* Texte plus doux pour les instructions */
+  font-size: 16px; /* Taille de texte confortable */
+  margin-bottom: 25px; /* Espacement pour séparer du formulaire */
+}
+
+/* Input Fields */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+mat-form-field .mat-mdc-text-field-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+mat-form-field .mat-mdc-text-field-wrapper:hover,
+mat-form-field .mat-mdc-text-field-wrapper:focus-within {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1976d2, #0d47a1); /* Modern gradient */
+  color: white;
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+  box-shadow: 0 6px 12px rgba(25, 118, 210, 0.3);
+  transform: translateY(-2px);
+}
+
+.login-btn:active {
+  transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .login-container {
+      flex-direction: column;
+      gap: 30px; /* Reduce space between elements */
+  }
+
+  .login-image {
+      order: -1;
+      width: 120%;
+  }
+
+  .login-form {
+      width: 90%;
+  }
+}
+
+/* Snackbar for Error Messages */
+.error-snackbar {
+  background-color: #d32f2f;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Register Text */
+.register-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Register Link */
+.register-link {
+  color: #1976d2;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.register-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}

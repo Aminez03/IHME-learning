@@ -1,0 +1,177 @@
+<!-- Navbar -->
+<mat-toolbar color="primary" class="navbar">
+  <h1 class="elearning-title">
+    <a routerLink="/formations">E-Learning</a>
+  </h1>
+
+      <!-- Menu Toggle Button -->
+      <button
+      mat-icon-button
+      (click)="sidenav.toggle()"
+      class="menu-button"
+      aria-label="Ouvrir/Fermer le menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+  <div class="navbar-actions">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <mat-icon>search</mat-icon>
+      <input
+        type="text"
+        placeholder="Rechercher..."
+        aria-label="Rechercher des cours"
+        [(ngModel)]="searchTerm"
+        (input)="filterFormations()"
+      />
+    </div>
+
+
+
+    <!-- Profile Button -->
+    <button
+      mat-icon-button
+      (click)="toggleProfileMenu()"
+      class="profile-button"
+      aria-label="Menu Profil"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- Profile Menu -->
+<div *ngIf="isProfileMenuOpen" class="profile-menu">
+  <div class="profile-avatar">
+    <img
+      [src]="userData.avatar || 'assets/image/pic-1.jpg'"
+      alt="Photo de Profil"
+      class="avatar"
+    />
+    <h3>{{ userData.nom || "Utilisateur" }}</h3>
+  </div>
+  <div class="profile-actions">
+    <button mat-button routerLink="/login" class="action-button">
+      <mat-icon>login</mat-icon> Connexion
+    </button>
+    <button mat-button routerLink="/register" class="action-button">
+      <mat-icon>person_add</mat-icon> Inscription
+    </button>
+    <button
+      mat-button
+      (click)="logout()"
+      color="warn"
+      class="action-button logout-button"
+    >
+      <mat-icon>exit_to_app</mat-icon> Déconnexion
+    </button>
+  </div>
+</div>
+
+<!-- Sidebar & Content -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidebar">
+    <div class="profile">
+      <img
+        [src]="userData.avatar || defaultAvatar"
+        alt="Photo de Profil"
+        class="avatar"
+        (error)="userData.avatar = defaultAvatar"
+      />
+      <h3>{{ userData.nom || "Utilisateur" }} {{ userData.prenom || "" }}</h3>
+      <button mat-button class="profile-btn" routerLink="/profil">
+        Voir profil
+      </button>
+    </div>
+
+    <mat-nav-list>
+      <!-- Accueil -->
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>home</mat-icon> Acceuil
+      </a>
+
+      <!-- Formations -->
+      <a mat-list-item routerLink="/formations" routerLinkActive="active">
+        <mat-icon>menu_book</mat-icon> Formations
+      </a>
+      <a mat-list-item routerLink="/examencrud" routerLinkActive="active" *ngIf="role === 'formateur'">
+        <mat-icon>school</mat-icon> Examens
+      </a>
+      <!-- Catégories -->
+      <a
+        mat-list-item
+        (click)="toggleCategorieMenu()"
+        routerLink="/categorie"
+        routerLinkActive="active"
+        *ngIf="role === 'admin'"
+      >
+        <mat-icon>category</mat-icon> Catégories
+        <mat-icon class="arrow-icon">{{
+          isCategorieMenuOpen ? "expand_less" : "expand_more"
+        }}</mat-icon>
+      </a>
+
+      <!-- Sous-catégories (dynamiques) -->
+      <div *ngIf="isCategorieMenuOpen" class="sub-menu centered">
+        <ng-container *ngFor="let categorie of Categories">
+          <a mat-list-item (click)="onCategorieChange(categorie.id)">
+            <mat-icon>label</mat-icon> {{ categorie.nomCategorie }}
+          </a>
+        </ng-container>
+
+        <!-- Affichage des sous-catégories de la catégorie sélectionnée -->
+        <div *ngIf="sousCategories.length > 0">
+          <ng-container *ngFor="let sousCat of sousCategories">
+            <a mat-list-item [routerLink]="['/sous-categorie', sousCat.id]">
+              <mat-icon>subdirectory_arrow_right</mat-icon>
+              {{ sousCat.nomSousCategorie }}
+            </a>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Sessions -->
+    
+      <a mat-list-item [routerLink]="['/session', userData.formationSessionID]" routerLinkActive="active" *ngIf="role === 'candidat'">
+        <mat-icon>event</mat-icon> Sessions
+      </a>
+      
+
+
+      <!-- Cours -->
+      <!-- <a mat-list-item routerLink="/cours" routerLinkActive="active"  *ngIf="iscandidat()">
+        <mat-icon>school</mat-icon> Cours
+      </a> -->
+
+      <!-- Utilisateur -->
+      <a mat-list-item (click)="toggleRoles()" *ngIf="role === 'admin'">
+        <mat-icon>people</mat-icon> Utilisateur
+        <mat-icon class="arrow-icon">{{
+          isRolesVisible ? "expand_less" : "expand_more"
+        }}</mat-icon>
+      </a>
+
+      <!-- Sous-menu rôles -->
+      <div *ngIf="isRolesVisible" class="sub-menu centered">
+        <a mat-list-item routerLink="/admin" routerLinkActive="active" *ngIf="role === 'admin'">
+          <mat-icon>shield</mat-icon> Admin
+        </a>
+        <a mat-list-item routerLink="/condidat" routerLinkActive="active" *ngIf="role === 'admin' || role === 'formateur'"
+        >
+          <mat-icon>school</mat-icon> Candidat
+        </a>
+        
+        <a mat-list-item routerLink="/formateur" routerLinkActive="active" *ngIf="role === 'admin' || role === 'candidat'"
+        >
+          <mat-icon>person</mat-icon> Formateur
+        </a>
+      </div>
+
+      <!-- Contact -->
+      <a mat-list-item routerLink="/contact" routerLinkActive="active">
+        <mat-icon>phone</mat-icon> Contact
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

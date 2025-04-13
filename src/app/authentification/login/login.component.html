@@ -1,0 +1,31 @@
+<div class="login-container">
+  <!-- Doctor Image on the Left -->
+  <div  fxLayout="row" fxLayoutAlign="space-between center" class="login-image ">
+    <img src="assets/images/login-elearning.svg" alt="e-learning-login">
+  </div>
+
+  <!-- Login Form on the Right -->
+  <div class="login-form">
+    <h2>Bienvenue de retour !</h2>
+    <p>Veuillez vous connecter pour continuer</p>    
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="adresseMail" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width login-btn ">Login</button>
+    </form>
+<!-- Register Link -->
+<p class="register-text">Vous n’avez pas de compte ? 
+  <a routerLink="/register" class="register-link">Inscrivez-vous</a>
+</p>
+   
+  </div>
+</div>

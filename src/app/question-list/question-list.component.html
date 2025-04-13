@@ -1,0 +1,96 @@
+<div class="question-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+
+
+      <div class="header">
+        <mat-card-actions class="breadcrumb">
+      
+          <a mat-button color="primary" routerLink="/examencrud">
+            Examens
+          </a>
+      
+          <a mat-button color="primary" [routerLink]="['/examencrud', examenId, 'questions']">
+        
+            {{ examen?.titre }}
+          </a>
+      
+        </mat-card-actions>
+
+      </div>
+
+
+
+
+
+
+
+      <div class="question-header">
+        <h2>Questions pour l'examen  {{ examen?.titre }}</h2>
+        <button
+          mat-flat-button
+          color="primary"
+          class="add-button"
+          (click)="openAddDialog()"
+        >
+          <mat-icon>add_circle</mat-icon> Ajouter une question
+        </button>
+      </div>
+  
+      <div class="content-wrapper">
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="questions.length === 0">
+          <mat-icon class="empty-icon">help_outline</mat-icon>
+          <p>Aucune question disponible pour cet examen.</p>
+          <button mat-stroked-button color="primary" (click)="openAddDialog()">
+            Ajouter la première question
+          </button>
+        </div>
+  
+        <!-- Questions List -->
+        <div class="questions-list" *ngIf="questions.length > 0">
+          <div class="question-card" *ngFor="let question of questions">
+            <div class="question-content">
+              <div class="question-title">
+                <span class="title-text">{{ question.titre }}</span>
+                <span class="question-type">
+                  {{ question.type }}
+                </span>
+              </div>
+              <div class="question-details">
+                <div class="detail-item">
+                  <mat-icon>star_outline</mat-icon>
+                  <span>Note: {{ question.note }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="question-actions">
+              <button
+                mat-icon-button
+                color="primary"
+                title="Modifier"
+                (click)="openEditDialog(question)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                title="Supprimer"
+                (click)="deleteQuestion(question.id)"
+              >
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+              <button
+                mat-stroked-button
+                color="accent"
+                [routerLink]="['/reponses', question.id]"
+              >
+                <mat-icon>list_alt</mat-icon> Réponses
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

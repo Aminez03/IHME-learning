@@ -1,0 +1,34 @@
+<div class="certif-container" *ngIf="certificat && formation; else loading">
+    <div class="certif-card" id="certificat">
+      <h1>🎓 Certificat de Réussite</h1>
+      <p class="candidate-name">
+        Ce certificat est attribué à <strong>{{ certificat.candidat.nom }} {{ certificat.candidat.prenom }}</strong>
+      </p>
+      <p>Pour avoir complété avec succès la formation :</p>
+      <h2>{{ formation.nomFormation }}</h2>
+      <div class="certif-details">
+        <p><strong>Date d'obtention :</strong> {{ certificat.dateObtention }}</p>
+        <p><strong>Note :</strong> {{ certificat.note }}</p>
+        <p><strong>Statut :</strong> {{ certificat.statut }}</p>
+        <p><strong>Date de création :</strong> {{ certificat.created_at }}</p>
+      </div>
+      <button (click)="generatePDF()" >📄 Télécharger le certificat</button>
+      <br>
+      
+      
+      <button (click)="goHome()">🏠 Retour à l'accueil</button>
+
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <div class="loading-message" *ngIf="certificat === undefined">
+      Chargement du certificat...
+    </div>
+    <div class="error-message" *ngIf="certificat === null">
+      ❌ Vous n'avez pas validé cette formation ou votre note est insuffisante.
+      <br /><br />
+      <button (click)="goHome()">🏠 Retour à l'accueil</button>
+    </div>
+  </ng-template>
+  

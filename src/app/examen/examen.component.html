@@ -1,0 +1,103 @@
+
+<div class="container">
+
+
+<app-sidebar></app-sidebar>
+
+<div class="content">
+ <div class="exam-container" *ngIf="examen">
+  <header class="exam-header">
+    <h2 class="exam-title">{{ examen.titre }}</h2>
+    <div class="exam-info">
+      <span><strong>Durée :</strong> {{ examen.duree }} min</span>
+      <span><strong>Questions :</strong> {{ examen.nombreQuestion }}</span>
+    </div>
+  </header>
+
+  <div *ngIf="hasStarted && !showResults" class="timer">
+    ⏳ Temps restant : <strong>{{ formatTime(timeLeft) }}</strong>
+  </div>
+
+  <div class="exam-content">
+    <!-- Start Button -->
+    <div class="start-section" *ngIf="!hasStarted">
+      <button class="btn btn-primary" (click)="startExam()">Commencer l'examen</button>
+    </div>
+
+    <!-- Questions Section -->
+    <div class="questions-wrapper" *ngIf="hasStarted">
+      <div class="question-card" *ngFor="let question of questions; let i = index">
+        <h3 class="question-title">{{ i + 1 }}. {{ question.titre }}</h3>
+
+        <!-- Question Type Indicator -->
+        <p class="question-type" [ngClass]="{'multiple': question.type === 'multiple', 'single': question.type === 'seule réponse'}">
+          {{ question.type === 'multiple' ? '🟢 Choix multiple' : '🔵 Choix unique' }}
+        </p>
+
+        <!-- Answer Options -->
+        <div class="answers">
+          <label class="answer-option"
+                 *ngFor="let reponse of reponses[question.id]"
+                 [ngClass]="{
+                   'correct': showResults && correctAnswers[question.id].includes(reponse.id),
+                   'incorrect': showResults && !correctAnswers[question.id].includes(reponse.id) && selectedReponses[question.id].includes(reponse.id)
+                 }">
+            <input
+              *ngIf="question.type === 'multiple'"
+              type="checkbox"
+              [checked]="selectedReponses[question.id].includes(reponse.id)"
+              (change)="toggleSelection(question.id, reponse.id)"
+              [disabled]="showResults"
+            />
+            <input
+              *ngIf="question.type === 'seule réponse'"
+              type="radio"
+              [name]="'question-' + question.id"
+              [checked]="selectedReponses[question.id][0] === reponse.id"
+              (change)="selectUnique(question.id, reponse.id)"
+              [disabled]="showResults"
+            />
+            <span class="answer-text">{{ reponse.texte }}</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="error-message" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <!-- Finish Button -->
+      <div class="action-section" *ngIf="!showResults">
+        <button class="btn btn-primary" (click)="onClickFinish()">Terminer l'examen</button>
+      </div>
+
+      <!-- Results Section -->
+      <div class="results-section" *ngIf="showResults">
+        <h3 class="results-title">Résultats</h3>
+        <p class="score">Score : <span>{{ scorefinal }} / {{ questions.length }}</span></p>
+        <p class="results-hint">Réponses correctes en vert, incorrectes en rouge.</p>
+      </div>
+    </div>
+
+    <div *ngIf="showResults">
+      <mat-card>
+        <mat-card-content>
+          <h2>Votre score : {{ score }} / {{ totalNotes }} points</h2>
+          <p>Pourcentage : {{ pourcentage }}%</p>
+          <p *ngIf="certificatCree">Certificat créé avec succès.</p>
+          <p *ngIf="!certificatCree">Aucun certificat attribué.</p>
+          <p>{{ message }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="button-container" *ngIf="certificatid">
+    <button mat-raised-button color="primary" [routerLink]="['/certif-session', certificatid]">
+      <mat-icon>description</mat-icon> Voir Certificat
+    </button>
+  </div>
+</div> 
+</div>
+

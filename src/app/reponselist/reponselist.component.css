@@ -1,0 +1,207 @@
+.reponse-container {
+    display: flex; /* Use flexbox to layout sidebar and main content */
+    min-height: 100vh; /* Ensure it takes full height */
+    padding: 0; /* Remove padding from container, we'll add it to main-content */
+    margin-top: 100px;
+  }
+  
+  /* Sidebar styles (consistent with ExamencrudComponent and QuestionListComponent) */
+  app-sidebar {
+    width: 250px; /* Match the sidebar width from other components */
+    background: #f5f5f5; /* Match the sidebar background color */
+    border-right: 1px solid #e0e0e0; /* Add a subtle border */
+  }
+  
+  /* Style the main content area */
+  .main-content {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Add padding here instead of reponse-container */
+    max-width: 1200px; /* Match the max-width from other components */
+    margin: 0 auto;
+  }
+  
+  .reponse-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .reponse-header h2 {
+    margin: 0;
+    color: #263238;
+    font-size: 26px;
+    font-weight: 600;
+    position: relative;
+    padding-left: 15px;
+  }
+  
+  .reponse-header h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 60%;
+    background: #0288d1;
+    border-radius: 2px;
+  }
+  
+  .add-button {
+    background: #0288d1;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+  
+  .add-button:hover {
+    background: #0277bd;
+    box-shadow: 0 2px 10px rgba(2, 136, 209, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .content-wrapper {
+    min-height: 200px;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px dashed #b0bec5;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: #90a4ae;
+    margin-bottom: 15px;
+  }
+  
+  .empty-state p {
+    color: #546e7a;
+    margin: 0 0 20px;
+    font-size: 16px;
+  }
+  
+  .reponses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .reponse-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #eceff1;
+    transition: all 0.3s ease;
+  }
+  
+  .reponse-card:hover {
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+  
+  .reponse-content {
+    flex: 1;
+  }
+  
+  .reponse-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .title-text {
+    color: #263238;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .reponse-status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .incorrect {
+    background: #ffebee;
+    color: #c62828;
+  }
+  
+  .reponse-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .reponse-actions button {
+    transition: all 0.3s ease;
+  }
+  
+  .reponse-actions button:hover {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 600px) {
+    .reponse-container {
+      flex-direction: column; /* Stack sidebar and content on small screens */
+    }
+  
+    app-sidebar {
+      width: 100%; /* Sidebar takes full width on small screens */
+    }
+  
+    .main-content {
+      padding: 15px; /* Reduce padding for smaller screens */
+    }
+  
+    .reponse-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .add-button {
+      width: 100%;
+    }
+  
+    .reponse-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  
+    .reponse-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+  .breadcrumb a {
+    position: relative;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    color: #0288d1;
+  }
+  
+  .breadcrumb a + a::before {
+    content: '/';
+    color: #999;
+    padding: 0 8px;
+  }

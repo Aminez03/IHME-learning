@@ -1,0 +1,42 @@
+<div class="sidenav-container">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="container mat-elevation-z8 p-4">
+      <h2 class="text-center mb-4">Contactez-Nous</h2>
+      <form class="form-material" (ngSubmit)="onSubmit()">
+        <div class="input-fields">
+          <mat-form-field appearance="fill">
+            <mat-label>Votre nom complet</mat-label>
+            <input matInput type="text" required [(ngModel)]="contact.name" name="name" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Votre email</mat-label>
+            <input matInput type="email" required [(ngModel)]="contact.email" name="email" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Sujet</mat-label>
+            <input matInput type="text" required [(ngModel)]="contact.subject" name="subject" />
+          </mat-form-field>
+        </div>
+
+        <div class="msg">
+          <mat-form-field appearance="fill">
+            <mat-label>Votre message</mat-label>
+            <textarea matInput rows="5" required [(ngModel)]="contact.message" name="message"></textarea>
+          </mat-form-field>
+          <div class="text-center">
+            <button mat-raised-button color="primary" type="submit" class="w-50">Envoyer le Message</button>
+          </div>
+        </div>
+      </form>
+    </div>
+ 
+  </section>
+</div>
+
+

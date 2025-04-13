@@ -1,0 +1,49 @@
+<!-- Certificat Professionnel Amélioré -->
+<div *ngIf="selectedCertificat" class="certificate-container mt-5 d-flex justify-content-center">
+  <div class="certificate p-5 shadow-lg bg-white position-relative text-center">
+
+    <!-- En-tête -->
+    <h2 class="certificate-title text-uppercase fw-bold mb-2">Certificat de Réussite</h2>
+    <p class="text-muted fst-italic">Ce certificat est décerné à</p>
+    <h3 class="certificate-name fw-bold text-primary mb-4">
+      {{ selectedCertificat.nom || 'Nom du Candidat' }}
+    </h3>
+
+    <!-- Corps -->
+    <p class="mb-1">Pour avoir complété avec succès la formation :</p>
+    <h4 class="formation-title text-decoration-underline mb-4">
+      {{ selectedCertificat.titreFormation || 'Titre de la formation' }}
+    </h4>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-5 text-start">
+        <p><strong>Date d'obtention :</strong> {{ selectedCertificat.dateObtention | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Note :</strong> {{ selectedCertificat.note }}</p>
+      </div>
+      <div class="col-md-5 text-start">
+        <p><strong>Statut :</strong> 
+          <span class="badge statut-badge"
+                [ngClass]="{
+                  'bg-success': selectedCertificat.statut === 'Réussi',
+                  'bg-danger': selectedCertificat.statut === 'Échoué',
+                  'bg-secondary': selectedCertificat.statut !== 'Réussi' && selectedCertificat.statut !== 'Échoué'
+                }">
+            {{ selectedCertificat.statut }}
+          </span>
+        </p>
+        <p><strong>Candidat ID :</strong> {{ selectedCertificat.candidatID }}</p>
+      </div>
+    </div>
+
+    <!-- Signature -->
+    <div class="text-end fst-italic pe-3">
+      <p>Fait le {{ selectedCertificat.dateCreation | date:'dd MMMM yyyy' }}</p>
+    </div>
+
+    <!-- Fermer -->
+    <button class="btn btn-outline-dark btn-sm position-absolute top-0 end-0 m-3" (click)="selectedCertificat = null">
+      <i class="bi bi-x-lg"></i> Fermer
+    </button>
+
+  </div>
+</div>

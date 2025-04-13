@@ -1,0 +1,16 @@
+<h2>Upload d'une Image</h2>
+
+<!-- FilePond input -->
+<file-pond
+  [files]="files"
+  acceptedFileTypes="image/*"
+  allowMultiple="true"
+  [server]="serverOptions"
+  name="file">
+</file-pond>
+
+<!-- Afficher l'image après upload -->
+<div *ngIf="formation.image">
+  <h3>Image Uploaded :</h3>
+  <img [src]="formation.image" alt="Uploaded Image" width="200">
+</div>

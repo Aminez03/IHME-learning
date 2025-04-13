@@ -1,0 +1,77 @@
+<div class="home-container">
+  <!-- Barre de navigation -->
+  <nav class="navbar">
+      <div class="nav-brand">
+        <h1 class="elearning-title">
+          <a routerLink="/formations">E-Learning</a>
+        </h1>
+        
+      </div>
+    <div class="nav-links">
+      <a (click)="scrollToSection('home')">Accueil</a>
+      <a (click)="scrollToSection('courses')">Formations</a>
+      <a (click)="scrollToSection('about')" >À propos</a>
+      <a (click)="scrollToSection('contact')">Contact</a>
+      <button mat-button class="log custom-login-button" [routerLink]="'/login'">Se connecter</button>
+    </div>
+  </nav>
+
+  <!-- Section principale avec carrousel -->
+  <section class="hero-section">
+    <div class="carousel-container">
+      <div class="carousel-slide" *ngFor="let slide of carouselImages; let i = index" [class.active]="i === currentSlide">
+        <img [src]="slide.image" [alt]="slide.caption">
+        <div class="carousel-caption">
+          <h1>{{ slide.caption }}</h1>
+          <p>Découvrez notre large choix de formations et commencez votre parcours d'apprentissage dès aujourd'hui !</p>
+          <button mat-raised-button color="primary" (click)="scrollToSection('courses')">
+            Voir les formations
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section des formations -->
+  <section id="courses" class="courses-section">
+    <h2>Nos Formations</h2>
+    <div class="courses-grid">
+      <mat-card *ngFor="let formation of filteredFormations" class="course-card">
+        <img mat-card-image [src]="formation.image" [alt]="formation.nomFormation">
+        <mat-card-content>
+          <h3>{{ formation.nomFormation }}</h3>
+          <p>{{ formation.description | slice:0:100 }}...</p>
+          <div class="course-details">
+            <span>{{ formation.niveau }}</span>
+            <span>{{ formation.duree }} mois</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="goToLogin()" matTooltip="Voir détail de la formation"
+          aria-label="Voir détail de la formation">
+            En savoir plus
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Pied de page -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div id="about" class="footer-section">
+        <h3>À propos</h3>
+        <p>Nous sommes une plateforme d’e-learning leader dédiée à offrir une éducation de qualité à tous, partout.</p>
+      </div>
+      <div id="contact" class="footer-section">
+        <h3>Contact</h3>
+        <p>Email : E-learnig@gmail.com</p>
+        <p>Téléphone : +216 27055885</p>
+        <p>Adresse : Tunisie,sfax,Sidi MAnsour</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      
+    </div>
+  </footer>
+</div>

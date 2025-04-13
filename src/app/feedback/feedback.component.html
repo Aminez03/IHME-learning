@@ -1,0 +1,83 @@
+<div class="feedback-container">
+  <h2>Feedbacks</h2>
+
+  <mat-card class="feedback-card">
+    <mat-card-title>Ajouter un commentaire</mat-card-title>
+    <mat-card-content>
+      <mat-form-field class="full-width" appearance="fill">
+        <textarea
+          matInput
+          [(ngModel)]="newFeedbackText"
+          placeholder="Écrire un commentaire…"
+          aria-label="Champ de saisie pour le feedback"
+        ></textarea>
+      </mat-form-field>
+
+      <div class="actions">
+        <button
+        mat-raised-button
+        color="primary"
+        (click)="addFeedback()"
+        [disabled]="!newFeedbackText.trim()"
+        aria-label="Ajouter un commentaire"
+        matTooltip="Ajouter un commentaire"
+ 
+      >
+        Ajouter
+      </button>
+        <button
+          mat-icon-button
+          class="eye-button"
+          (click)="toggleFeedbackList()"
+          [matTooltip]="showFeedbackList ? 'Masquer les commentaires' : 'Afficher les commentaires'"
+          [attr.aria-label]="showFeedbackList ? 'Masquer les commentaires' : 'Afficher les commentaires'"
+        >
+          <mat-icon>{{ showFeedbackList ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div *ngIf="showFeedbackList" class="feedback-list">
+    <div *ngIf="feedbacks.length === 0" class="no-feedback">
+      Aucun feedback disponible pour cette session.
+    </div>
+
+    <ul>
+      <li *ngFor="let feedback of feedbacks" class="feedback-item">
+        <div class="user-avatar">
+          <ng-container *ngIf="feedback.avatarUrl; else defaultAvatar">
+            <img
+              [src]="feedback.avatarUrl"
+              [alt]="feedback.nom || 'Avatar utilisateur'"
+              class="avatar-img"
+              (error)="feedback.avatarUrl = undefined"
+              loading="lazy"
+            />
+          </ng-container>
+          <ng-template #defaultAvatar>
+            <mat-icon>account_circle</mat-icon>
+          </ng-template>
+        </div>
+
+        <div class="feedback-content">
+          <span class="user-name">{{ feedback.nom }} :</span>
+          <span>{{ feedback.texte }}</span>
+        </div>
+
+        <div class="feedback-meta">
+          <small class="date">{{ feedback.created_at | date: 'short' }}</small>
+
+          <button
+            *ngIf="feedback.candidatID === candidatData?.id && feedback.id !== undefined"
+            (click)="deleteFeedback(feedback.id!)"
+            class="delete-btn"
+            aria-label="Supprimer ce commentaire"
+          >
+            Supprimer
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

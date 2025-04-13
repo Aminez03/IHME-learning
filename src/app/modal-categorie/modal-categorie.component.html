@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+    {{ data ? 'Modifier la Catégorie' : 'Ajouter une Catégorie' }}
+  </h2>
+  
+  <form [formGroup]="categorieForm" (ngSubmit)="onSubmit()" class="modal-form">
+  
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nom de la catégorie</mat-label>
+      <input matInput placeholder="Ex: Informatique" formControlName="nomCategorie" />
+      <mat-error *ngIf="categorieForm.get('nomCategorie')?.hasError('required')">
+        Le nom est requis
+      </mat-error>
+    </mat-form-field>
+  
+    <div class="actions">
+      <button mat-stroked-button color="warn" (click)="onCancel()">Annuler</button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="categorieForm.invalid">
+        {{ data ? 'Modifier' : 'Ajouter' }}
+      </button>
+    </div>
+  </form>
+  

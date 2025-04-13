@@ -1,0 +1,100 @@
+<div class="sidenav-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="cours-section">
+    <div class="content">
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Chargement en cours...</p>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="errorMessage && iscandidat()" class="error-message mat-elevation-z2">
+        <mat-icon>error_outline</mat-icon>
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <!-- Course Content -->
+      <div *ngIf="cour && !isLoading">
+        <mat-card class="detail-card mat-elevation-z8">
+          <div class="header">
+            <mat-card-actions class="breadcrumb">
+          
+              <a mat-button color="primary" routerLink="/formations">
+                Accueil
+              </a>
+          
+              <a *ngIf="Categorie" mat-button color="primary" [routerLink]="['/formations', Categorie.nomCategorie]">
+                
+                {{ Categorie.nomCategorie }}
+              </a>
+          
+              <a *ngIf="sousCategorie" mat-button color="primary" [routerLink]="['/formations', Categorie?.nomCategorie, sousCategorie.nomSousCategorie]">
+             
+                {{ sousCategorie.nomSousCategorie }}
+              </a>
+          
+              <a *ngIf="formation" mat-button color="primary" [routerLink]="['/detail-formation', session?.formationID]">
+             
+                {{ formation.nomFormation }}
+              </a>
+          
+              <a *ngIf="cour" mat-button color="primary" [routerLink]="['/session', cour.formationSessionID]">
+             
+                Session
+              </a>
+          
+              <a *ngIf="cour" mat-button color="primary" [routerLink]="['/detail-cour', cour.id]">
+             
+                {{ cour.titre }}
+              </a>
+          
+            </mat-card-actions>
+          </div>
+          
+          <mat-card-header class="detail-header">
+            <mat-card-title>{{ cour.titre }}</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content class="detail-content">
+            <p class="description"><strong>Description :</strong> {{ cour.description }}</p>
+            <div class="video-container">
+              <video width="100%" controls (click)="onVideoClick($event)">
+                <source [src]="cour.videoURL" type="video/mp4" />
+                Votre navigateur ne supporte pas la lecture de vidéos.
+              </video>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Progress -->
+        <div *ngIf="iscandidat()">
+          <div *ngIf="progression; else loading">
+            <mat-card class="progress-card mat-elevation-z8">
+              <mat-card-content>
+                <h2 class="progress-heading">Votre progression</h2>
+                <div class="spinner-container">
+                  <mat-progress-spinner
+                    class="progress-spinner"
+                    [mode]="'determinate'"
+                    [value]="progressionValue"
+                    [strokeWidth]="5">
+                  </mat-progress-spinner>
+                  <div class="progress-value">{{ progressionValue }}%</div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <ng-template #loading>
+            <div class="loading-container">
+              <mat-spinner></mat-spinner>
+              <p>Chargement des données...</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

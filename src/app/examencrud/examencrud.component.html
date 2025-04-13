@@ -1,0 +1,42 @@
+
+
+<div class="exam-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+      <div class="header-section">
+        <h3 class="exam-list-title">Liste des Examens</h3>
+        <button mat-fab extended color="primary" class="add-button" (click)="openDialog()">
+          <mat-icon>add</mat-icon> Nouvel Examen
+        </button>
+      </div>
+    
+      <div class="exam-grid">
+        <div class="exam-card" *ngFor="let examen of examens">
+          <div class="card-header">
+            <h4>{{ examen.titre }}</h4>
+          </div>
+          <div class="card-content">
+            <div class="info-item">
+              <mat-icon>help_outline</mat-icon>
+              <span>{{ examen.nombreQuestion }} Questions</span>
+            </div>
+            <div class="info-item">
+              <mat-icon>timer</mat-icon>
+              <span>{{ examen.duree }} min</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button mat-mini-fab color="primary" (click)="editExamen(examen)" title="Modifier">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" (click)="deleteExamen(examen.id)" title="Supprimer">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-stroked-button color="accent" (click)="openQuestionList(examen.id)">
+              <mat-icon>list_alt</mat-icon> Questions
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

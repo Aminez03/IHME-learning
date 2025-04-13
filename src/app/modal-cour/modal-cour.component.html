@@ -1,0 +1,51 @@
+<mat-dialog-content [formGroup]="form">
+    <!-- Champ pour l'ID de la formation -->
+    <mat-form-field>
+      <input matInput placeholder="ID de la formation de session" formControlName="formationSessionID" type="number">
+    </mat-form-field>
+    <br />
+  
+    <!-- Champ pour le titre du cours -->
+    <mat-form-field>
+      <input matInput placeholder="Titre du cours" formControlName="titre">
+    </mat-form-field>
+    <br />
+  
+    <!-- Champ pour la description du cours -->
+    <mat-form-field>
+      <textarea matInput placeholder="Description du cours" formControlName="description"></textarea>
+    </mat-form-field>
+    <br />
+  
+
+   <!-- Champ pour uploader une vidéo -->
+<input type="file" (change)="uploadVideo($event)">
+<br>
+
+<!-- Affichage de la vidéo après upload -->
+<div *ngIf="videoUrl">
+  <h3>Vidéo Uploadée :</h3>
+  <video [src]="videoUrl" alt="Vidéo du cours" width="200" controls></video>
+</div>
+
+<br>
+
+<!-- Champ pour entrer l'URL de la vidéo dans le formulaire -->
+<mat-form-field>
+  <mat-label>URL de la vidéo</mat-label>
+  <input matInput  formControlName="videoURL" >
+</mat-form-field>
+
+    <br />
+
+
+
+
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <!-- Bouton pour fermer le formulaire -->
+    <button mat-raised-button (click)="close()">Fermer</button>
+    <!-- Bouton pour enregistrer les données -->
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer</button>
+  </mat-dialog-actions>

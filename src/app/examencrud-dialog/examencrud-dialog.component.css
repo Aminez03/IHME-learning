@@ -1,0 +1,150 @@
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Adjusted gap to match the reference image */
+    width: 100%;
+    padding: 20px; /* Reduced padding to match the reference image */
+    background: #ffffff; /* White background */
+    border-radius: 8px; /* Slightly smaller border radius to match the reference */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+    max-width: 400px; /* Adjusted width to match the reference image */
+    margin: 0 auto; /* Center the dialog */
+  }
+  
+  .dialog-form h2 {
+    margin: 0 0 16px;
+    font-size: 24px; /* Adjusted font size to match the reference */
+    font-weight: 600;
+    color: #1a237e; /* Match the e-learning theme color */
+    text-align: center;
+  }
+  
+  .dialog-form mat-form-field {
+    width: 100%;
+    transition: all 0.3s ease; /* Smooth transitions for interactions */
+  }
+  
+  .dialog-form .mat-form-field {
+    background-color: #ffffff; /* White background for form fields */
+    border-radius: 4px;
+  }
+  
+  .dialog-form .mat-form-field .mat-form-field-wrapper {
+    padding-bottom: 0; /* Remove extra padding */
+  }
+  
+  .dialog-form .mat-form-field .mat-form-field-outline {
+    color: #3f51b5; /* Outline color to match theme */
+  }
+  
+  .dialog-form .mat-form-field .mat-form-field-label {
+    color: #2c3e50; /* Darker label color for contrast */
+    font-weight: 400;
+  }
+  
+  .dialog-form .mat-form-field .mat-icon {
+    color: #757575; /* Gray icon color to match the reference */
+    margin-right: 8px;
+  }
+  
+  .dialog-form .mat-form-field:hover .mat-form-field-outline {
+    color: #5c6bc0; /* Slightly lighter on hover */
+  }
+  
+  .dialog-form .mat-form-field.mat-focused .mat-form-field-outline {
+    color: #1a237e; /* Darker when focused */
+  }
+  
+  .dialog-form .mat-error {
+    font-size: 12px;
+    color: #e91e63; /* Pink error color for visibility */
+  }
+  
+  .dialog-buttons {
+    display: flex;
+    flex-direction: row; /* Ensure buttons are side by side */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 12px; /* Adjusted gap to match the reference image */
+    margin-top: 16px;
+  }
+  
+  .dialog-buttons button {
+    min-width: 100px; /* Adjusted width to match the reference */
+    border-radius: 20px; /* Rounded buttons to match the reference */
+    transition: all 0.3s ease; /* Smooth transitions */
+    font-weight: 500;
+    text-transform: uppercase; /* Match the reference image's text style */
+  }
+  
+  .dialog-buttons .cancel-button {
+    border-color: #e91e63; /* Pink border for Annuler button */
+    color: #e91e63;
+  }
+  
+  .dialog-buttons .cancel-button:hover {
+    background-color: #fce4ec; /* Light pink background on hover */
+  }
+  
+  .dialog-buttons .validate-button {
+    border-color: #3f51b5; /* Blue border for Valider button */
+    color: #3f51b5;
+  }
+  
+  .dialog-buttons .validate-button:hover {
+    background-color: #e8eaf6; /* Light blue background on hover */
+  }
+  
+  .dialog-buttons .validate-button mat-icon {
+    margin-right: 4px;
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
+  }
+  
+  .dialog-buttons .validate-button[disabled] {
+    border-color: #bdbdbd; /* Grayed out when disabled */
+    color: #bdbdbd;
+    background: none;
+  }
+  
+  .mat-dialog-content {
+    overflow: hidden !important; /* Prevent scroll bars */
+  }
+  
+  /* Animation for dialog entrance */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .dialog-form {
+    animation: fadeIn 0.3s ease-in-out; /* Fade-in animation */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 400px) {
+    .dialog-form {
+      padding: 16px;
+      max-width: 100%;
+    }
+  
+    .dialog-form h2 {
+      font-size: 20px;
+    }
+  
+    .dialog-buttons {
+      flex-direction: row; /* Keep buttons side by side on small screens */
+      gap: 8px;
+    }
+  
+    .dialog-buttons button {
+      min-width: 90px; /* Slightly smaller buttons on small screens */
+    }
+  }

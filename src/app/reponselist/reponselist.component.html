@@ -1,0 +1,88 @@
+<div class="reponse-container">
+    <app-sidebar></app-sidebar>
+    <div class="main-content">
+      <div class="header">
+        <mat-card-actions class="breadcrumb">
+      
+          <a mat-button color="primary" routerLink="/examencrud">
+            Examens
+          </a>
+      
+          <a mat-button color="primary" [routerLink]="['/examencrud', examen?.id , 'questions']">
+        
+            {{ examen?.titre }}
+          </a>
+      
+          <a mat-button color="primary" [routerLink]="['/reponses', question?.id ]">
+        
+            {{ question?.titre }}
+          </a>
+      
+      
+        </mat-card-actions>
+
+      </div>
+
+
+
+
+
+
+
+
+      <div class="reponse-header">
+        <h2>Réponses pour la question   {{ question?.titre }} </h2>
+        <button
+          mat-flat-button
+          color="primary"
+          class="add-button"
+          (click)="openAddDialog()"
+        >
+          <mat-icon>add_circle</mat-icon> Ajouter une réponse
+        </button>
+      </div>
+  
+      <div class="content-wrapper">
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="reponses.length === 0">
+          <mat-icon class="empty-icon">help_outline</mat-icon>
+          <p>Aucune réponse disponible pour cette question.</p>
+          <button mat-stroked-button color="primary" (click)="openAddDialog()">
+            Ajouter la première réponse
+          </button>
+        </div>
+  
+        <!-- Reponses List -->
+        <div class="reponses-list" *ngIf="reponses.length > 0">
+          <div class="reponse-card" *ngFor="let reponse of reponses">
+            <div class="reponse-content">
+              <div class="reponse-title">
+                <span class="title-text">{{ reponse.texte }}</span>
+                <span class="reponse-status" [ngClass]="{'correct': reponse.statut, 'incorrect': !reponse.statut}">
+                  {{ reponse.statut ? 'Correcte' : 'Incorrecte' }}
+                </span>
+              </div>
+            </div>
+            <div class="reponse-actions">
+              <button 
+                mat-icon-button 
+                color="primary" 
+                title="Modifier"
+                (click)="openEditDialog(reponse)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button 
+                mat-icon-button 
+                color="warn" 
+                title="Supprimer"
+                (click)="deleteReponse(reponse.id)"
+              >
+                <mat-icon>delete_outline</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

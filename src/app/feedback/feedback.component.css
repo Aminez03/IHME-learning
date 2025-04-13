@@ -1,0 +1,233 @@
+/* --- Conteneur principal --- */
+.feedback-container {
+ margin-top: -50px!important;
+  width: 98%;
+  margin: 20px auto;
+  margin-left: 20px;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Titre section */
+.feedback-container h2 {
+  text-align: center;
+  color: #3f51b5;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Carte d’ajout */
+.feedback-card {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  font-size: 20px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+/* Champ de texte */
+.full-width {
+  width: 100%;
+}
+
+/* Zone de texte stylisée */
+mat-form-field.full-width textarea {
+  min-height: 100px;
+  background: #f4f6f9;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Boutons */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Bouton "Ajouter" */
+.actions button[mat-raised-button] {
+  background-color: #3f51b5;
+  color: white;
+  padding: 8px 24px;
+  border-radius: 25px;
+  font-weight: 500;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions button[mat-raised-button]:hover {
+  background-color: #1e88e5;
+  transform: scale(1.05);
+}
+
+/* Bouton icône (œil) stylisé */
+.eye-button {
+  background: linear-gradient(135deg, #3f51b5, #2196f3);
+  border-radius: 50%;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: white;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.eye-button mat-icon {
+  font-size: 24px;
+}
+
+.eye-button:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #3949ab, #1e88e5);
+}
+
+/* Liste des feedbacks */
+.feedback-list {
+  margin-top: 25px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Aucun commentaire */
+.no-feedback {
+  text-align: center;
+  color: #757575;
+  font-style: italic;
+  padding: 20px;
+  font-size: 18px;
+}
+
+/* Feedback individuel */
+.feedback-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.feedback-item:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar utilisateur */
+.user-avatar {
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.user-avatar mat-icon,
+.avatar-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e0e0e0;
+}
+
+.avatar-img {
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+/* Contenu du commentaire */
+.feedback-content {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #3f51b5;
+  margin-right: 5px;
+}
+
+/* Infos meta */
+.feedback-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date {
+  font-size: 14px;
+  color: #757575;
+  white-space: nowrap;
+}
+
+/* Bouton supprimer */
+.delete-btn {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 6px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #b71c1c;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .feedback-container,
+  .feedback-list {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .feedback-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-avatar {
+    margin-bottom: 10px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+
+  .eye-button {
+    align-self: center;
+  }
+
+  .feedback-container h2 {
+    font-size: 22px;
+  }
+
+  .feedback-item span {
+    font-size: 14px;
+  }
+}

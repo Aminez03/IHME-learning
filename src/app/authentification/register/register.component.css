@@ -1,0 +1,97 @@
+/* Register Page Container */
+.register-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh; /* Changed from height to min-height */
+  background: linear-gradient(to right, #eef2f3, #dbe6f6);
+  gap: 50px;
+  padding: 20px;
+  overflow: auto; /* Changed from hidden to auto to allow scrolling */
+}
+
+/* Image Section */
+.register-image {
+  display: flex;
+  align-items: center; /* Center image vertically */
+  justify-content: center;
+}
+
+.register-image img {
+  max-width: 90%;
+  width: 700px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.register-image img:hover {
+  transform: scale(1.03);
+}
+
+/* Form Container */
+.register-form {
+  flex: 1;
+  max-width: 600px; /* Increased width to accommodate two fields per row */
+  background: white;
+  padding: 45px;
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Form Layout Adjustments */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns for form fields */
+  gap: 15px;
+  width: 100%;
+}
+
+/* Remove the special row for Nom & Prénom since all fields are now two per row */
+.form-row {
+  display: contents; /* Let the grid handle the layout */
+}
+
+/* Ensure inputs take full width */
+mat-form-field {
+  width: 100%;
+}
+
+/* Register Button */
+.register-btn {
+  width: 100%;
+  grid-column: span 2; /* Button spans both columns */
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+  box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+  transition: all 0.3s;
+  height: 45px;
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #1565c0, #0a3c8c);
+}
+
+/* Login Text */
+.login-text {
+  grid-column: span 2; /* Text spans both columns */
+  font-size: 12px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.login-link {
+  color: #1976d2;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,64 @@
+/* Footer */
+.footer {
+  background: #1f2a44; /* Fond sombre correspondant à l'image */
+  color: #e2e8f0;
+  padding: 2rem 2rem; /* Réduction du padding pour un look plus compact */
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: flex-end; /* Alignement à droite comme dans l'image */
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  text-align: left; /* Alignement du texte à gauche pour lisibilité */
+}
+
+.footer-section h3 {
+  font-size: 1.2rem; /* Taille légèrement réduite pour correspondre à l'image */
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.footer-section p {
+  font-size: 0.9rem; /* Taille ajustée pour correspondre à l'image */
+  color: #cbd5e0;
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
+}
+
+/* Suppression des liens <a> car ils ne sont pas dans l'image */
+.footer-section a {
+  display: none; /* Pas de liens visibles dans l'image */
+}
+
+/* Suppression de la section footer-bottom car absente dans l'image */
+.footer-bottom {
+  display: none; /* Pas de bordure ou de texte en bas dans l'image */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-content {
+    justify-content: center; /* Centrage sur mobile */
+    text-align: center;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .footer-section p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+}

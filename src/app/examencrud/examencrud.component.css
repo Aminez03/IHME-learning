@@ -1,0 +1,171 @@
+.container {
+   /* Correspond à la barre de navigation */
+}
+
+/* ========== Contenu principal ========== */
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.exam-container {
+    display: flex; /* Use flexbox to layout sidebar and main content */
+    min-height: 100vh; /* Ensure it takes full height */
+    padding: 0; /* Remove padding from container, we'll add it to main-content */
+  }
+  
+  /* Assuming app-sidebar has its own styles, but let's ensure it has a fixed width */
+  app-sidebar {
+    width: 250px; /* Adjust based on your sidebar's actual width */
+    background: #f5f5f5; /* Match the sidebar background color from the image */
+    border-right: 1px solid #e0e0e0; /* Add a subtle border */
+  }
+  
+  /* Style the main content area */
+  .main-content {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Add padding here instead of exam-container */
+    max-width: 1200px;
+    margin: 0 auto;
+    
+  }
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .exam-list-title {
+    color: #1a237e;
+    font-size: 28px;
+    margin: 0;
+    position: relative;
+    padding-left: 15px;
+  }
+  
+  .exam-list-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background-color: #3f51b5;
+    border-radius: 2px;
+  }
+  
+  .add-button {
+    background: linear-gradient(45deg, #3f51b5, #5c6bc0);
+    box-shadow: 0 2px 10px rgba(63, 81, 181, 0.3);
+    transition: all 0.3s ease;
+    margin-top: 100px;
+  }
+  
+  .add-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(63, 81, 181, 0.4);
+  }
+  
+  .exam-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .exam-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .exam-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-header {
+    background: #f5f6fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e8eaf6;
+  }
+  
+  .card-header h4 {
+    margin: 0;
+    color: #1a237e;
+    font-size: 18px;
+  }
+  
+  .card-content {
+    padding: 20px;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    color: #424242;
+  }
+  
+  .info-item mat-icon {
+    color: #3f51b5;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+  
+  .card-actions {
+    padding: 15px 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    border-top: 1px solid #e8eaf6;
+    background: #fafafa;
+  }
+  
+  .card-actions button {
+    transition: all 0.3s ease;
+  }
+  
+  .card-actions button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .exam-container {
+      flex-direction: column; /* Stack sidebar and content on small screens */
+    }
+  
+    app-sidebar {
+      width: 100%; /* Sidebar takes full width on small screens */
+    }
+  
+    .main-content {
+      padding: 15px; /* Reduce padding for smaller screens */
+    }
+  
+    .header-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .add-button {
+      width: 100%;
+    }
+  
+    .exam-grid {
+      grid-template-columns: 1fr;
+    }
+  }

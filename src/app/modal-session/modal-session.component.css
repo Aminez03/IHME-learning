@@ -1,0 +1,68 @@
+.dialog-content {
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .dialog-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .full-width {
+    grid-column: 1 / -1;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .cancel-button {
+    margin-right: 10px;
+    color: #666;
+  }
+  
+  .save-button {
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  mat-error {
+    font-size: 0.8rem;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .success-snackbar {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .error-snackbar {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .success-snackbar .mat-snack-bar-action,
+  .error-snackbar .mat-snack-bar-action {
+    color: white;
+  }

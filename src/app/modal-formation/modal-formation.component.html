@@ -1,0 +1,46 @@
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Nom de la formation" formControlName="nomFormation">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Niveau" formControlName="niveau">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Durée (mois)" formControlName="duree" type="number">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description de la formation" formControlName="description" rows="4"></textarea>
+  </mat-form-field>
+
+  <!-- Image Upload -->
+  <label>Image de la formation :</label>
+  <input type="file" (change)="uploadImage($event)" class="form-control mb-2">
+
+  <div *ngIf="imageURL">
+    <h4>Image uploadée :</h4>
+    <img [src]="imageURL" alt="Image Formation" width="200">
+  </div>
+
+  <mat-form-field>
+    <mat-label>URL de l'image</mat-label>
+    <input matInput formControlName="image">
+  </mat-form-field>
+
+  <!-- Liste des sous-catégories -->
+  <mat-form-field *ngIf="sousCategories.length > 0">
+    <mat-label>Sous-catégorie</mat-label>
+    <mat-select formControlName="sousCategorieID">
+      <mat-option *ngFor="let sousCategorie of sousCategories" [value]="sousCategorie.id">
+        {{ sousCategorie.nomSousCategorie }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions class="action-buttons">
+  <button mat-raised-button color="warn" (click)="close()">Fermer</button>
+  <button mat-raised-button color="primary" (click)="save()">Enregistrer</button>
+</mat-dialog-actions>

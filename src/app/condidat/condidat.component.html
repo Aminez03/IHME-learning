@@ -1,0 +1,89 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+
+  <div class="content">
+    <mat-card class="candidat-card mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title class="text-center">
+          <br />
+          <mat-icon>group</mat-icon> Liste de Tous les Candidats
+        </mat-card-title>
+      </mat-card-header>
+
+      <br /><br />
+
+      <mat-card-content>
+        <div *ngIf="errorMessage" class="alert alert-danger text-center">
+          <mat-icon>error</mat-icon> {{ errorMessage }}
+        </div>
+
+        <table mat-table [dataSource]="paginatedCandidats" class="mat-elevation-z8" *ngIf="candidats.length > 0">
+          <!-- Nom Column -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let candidat"> {{ candidat.nom }} {{ candidat.prenom }} </td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let candidat"> {{ candidat.adresseMail }} </td>
+          </ng-container>
+
+          <!-- Role Column -->
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Rôle </th>
+            <td mat-cell *matCellDef="let candidat">
+              <mat-badge color="primary" matBadgeOverlap="false">
+                {{ candidat.role }}
+              </mat-badge>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let candidat">
+              <!-- Bloquer l'utilisateur -->
+              <button *ngIf="isAdmin()" mat-icon-button (click)="blockUser(candidat.id)" class="block-btn" matTooltip="Bloquer l'utilisateur" aria-label="Bloquer l'utilisateur">
+                <mat-icon color="warn">block</mat-icon>
+              </button>
+
+              <!-- Supprimer l'utilisateur -->
+              <button *ngIf="isAdmin()" mat-icon-button color="warn" (click)="deleteUser(candidat.id)" matTooltip="Supprimer l'utilisateur" aria-label="Supprimer l'utilisateur">
+                <mat-icon>delete</mat-icon>
+              </button>
+
+              <!-- Modifier le profil -->
+              <button *ngIf="isAdmin()" mat-icon-button color="accent" (click)="openEdit(candidat.id)" matTooltip="Modifier le profil" aria-label="Modifier le profil">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <!-- Voir le profil -->
+             
+              <button *ngIf="isAdmin()" mat-icon-button (click)="getUserById(candidat.id)" class="block-btn"   matTooltip="Voir le profil" aria-label="Voir le profil"> 
+                <mat-icon color="warn">visibility</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div *ngIf="candidats.length === 0" class="alert alert-info text-center">
+          <mat-icon>info</mat-icon> Aucun candidat trouvé.
+        </div>
+
+        <!-- Pagination -->
+        <mat-paginator
+          [length]="candidats.length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          (page)="updatePaginatedCandidats()"
+          aria-label="Sélectionner une page">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
