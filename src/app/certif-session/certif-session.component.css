@@ -1,6 +1,7 @@
 /* Certificate Container */
 
 .header{
+  margin-left: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +28,7 @@
 
 /* Certificate Card */
 .certif-card {
+  margin-left: 200px;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);

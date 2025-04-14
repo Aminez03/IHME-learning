@@ -82,13 +82,12 @@
 
     <mat-nav-list>
       <!-- Accueil -->
-      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+      <a mat-list-item routerLink="/formations" routerLinkActive="active">
         <mat-icon>home</mat-icon> Acceuil
       </a>
 
-      <!-- Formations -->
-      <a mat-list-item routerLink="/formations" routerLinkActive="active">
-        <mat-icon>menu_book</mat-icon> Formations
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon> Tableau de bord
       </a>
       <a mat-list-item routerLink="/examencrud" routerLinkActive="active" *ngIf="role === 'formateur'">
         <mat-icon>school</mat-icon> Examens

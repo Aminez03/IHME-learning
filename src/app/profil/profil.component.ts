@@ -20,7 +20,7 @@ export class ProfilComponent {
     private userService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar // ✅ Snackbar injecté
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -62,7 +62,6 @@ export class ProfilComponent {
       console.error("Aucun token trouvé !");
       return;
     }
-
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     this.userService.updateUser(updatedUser).subscribe({
@@ -70,14 +69,14 @@ export class ProfilComponent {
         console.log("Profil mis à jour :", response);
         this.user = response;
        // Recharger la page pour voir les changements
-
+       location.reload();
         // ✅ Snackbar de succès
         this.snackBar.open('✅ Profil modifié avec succès !', 'Fermer', {
-          duration: 3000,
+          duration: 6000,
           panelClass: ['snackbar-success']
         });
 
-        location.reload();
+      
       },
       error: (error: HttpErrorResponse) => {
         console.error("Erreur mise à jour :", error);

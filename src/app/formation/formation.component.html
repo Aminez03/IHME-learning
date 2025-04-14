@@ -11,7 +11,7 @@
           <div class="carousel-caption">
             <h1>{{ slide.caption }}</h1>
             <p> Commencez votre parcours d'apprentissage dès aujourd'hui !</p>
-            <button mat-raised-button color="primary" (click)="scrollToSection('courses')">
+            <button mat-raised-button color="primary" (click)="scrollToSection('courses')" aria-label="Parcourir les formations">
               Parcourir les formations
             </button>
           </div>
@@ -24,8 +24,9 @@
         matTooltip="Ajouter une nouvelle formation" aria-label="Ajouter une nouvelle formation">
         <mat-icon>add</mat-icon> Ajouter une formation
       </button>
+      <br>
       
-      <h1 class="categories-title">Nos catégories</h1>
+      <h1 class="categories-title" [style.marginTop.px]="-10">Nos catégories</h1>
       <!-- Afficher les catégories si aucune catégorie n'est sélectionnée -->
       <div *ngIf="!selectedCategory" class="categories-container">
         <div *ngFor="let category of Categories" class="category-card" (click)="selectCategory(category)">
@@ -45,6 +46,7 @@
       </div>
 
       <div class="mat-elevation-z8">
+        <h1 class="categories-title">Nos formations</h1>
         <!-- Conteneur des cartes de formation -->
         <div class="formations-container" id="courses">
           <mat-card class="example-card" *ngFor="let formation of paginatedFormations">

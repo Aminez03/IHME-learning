@@ -99,6 +99,9 @@ export class DetailSessionComponent {
   isFormateur():boolean{
     return this.userService.isFormateur();
   }
+  iscandidat():boolean{
+    return this.userService.iscandidat();
+  }
 
   getFormationById(formationID: number): void {
     this.FS.getFormationById(formationID).subscribe({

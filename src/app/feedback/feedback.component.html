@@ -69,7 +69,7 @@
           <small class="date">{{ feedback.created_at | date: 'short' }}</small>
 
           <button
-            *ngIf="feedback.candidatID === candidatData?.id && feedback.id !== undefined"
+            *ngIf="feedback.candidatID === candidatData?.id && feedback.id !== undefined|| isAdmin()|| isFormateur()"
             (click)="deleteFeedback(feedback.id!)"
             class="delete-btn"
             aria-label="Supprimer ce commentaire"

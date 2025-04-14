@@ -146,4 +146,10 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   toggleFeedbackList(): void {
     this.showFeedbackList = !this.showFeedbackList;
   }
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+  isFormateur(): boolean {
+    return this.authService.isFormateur();
+  }
 }

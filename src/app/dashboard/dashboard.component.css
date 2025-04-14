@@ -2,15 +2,15 @@
 .container {
   display: flex;
   min-height: 100vh;
-  background-color: #f4f6f9;
+
   transition: background-color 0.3s ease;
   font-family: 'Segoe UI', sans-serif;
+  width: 100%;
 }
 
-/* Dark mode */
 .container.dark-mode {
-  background-color: #1e1e2f;
-  color: #eaeaea;
+  background: linear-gradient(to right, #121212, #1f1f1f);
+  color: #e0e0e0;
 }
 
 /* Dashboard section */
@@ -30,78 +30,82 @@
 }
 
 .dashboard-header h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #333;
+  color: #222;
 }
 
 .dashboard-header .subtitle {
-  font-size: 1rem;
-  color: #777;
+  font-size: 2rem;
+
+  color: #555;
 }
 
 .dark-mode .dashboard-header h2,
 .dark-mode .subtitle {
-  color: #eaeaea;
+  color: #f0f0f0;
 }
 
 /* Toggle button */
 .mode-toggle {
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
-  color: #555;
+  font-size: 1.5rem;
+  color: inherit;
+  transition: transform 0.2s;
 }
 
-.dark-mode .mode-toggle {
-  color: #fff;
+.mode-toggle:hover {
+  transform: scale(1.2);
 }
 
 /* Grid stats */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .stat-card {
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 1.2rem;
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 1.2rem;
+  padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 .stat-card .icon {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   color: #3f51b5;
 }
 
 .stat-card h3 {
   margin: 0;
-  font-size: 1rem;
-  color: #333;
+  font-size: 1.1rem;
+  color: #222;
 }
 
 .stat-card p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #000;
 }
 
 .dark-mode .stat-card {
-  background-color: #2e2e3e;
+  background-color: rgba(40, 40, 50, 0.6);
   color: #fff;
 }
 
@@ -109,14 +113,14 @@
   color: #90caf9;
 }
 
-/* Progress circle */
+/* Progress */
 .progress-container {
   text-align: center;
-  margin: 2rem auto;
+  margin: 3rem auto;
 }
 
 .progress-container h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
@@ -126,21 +130,22 @@
   font-weight: 600;
 }
 
-/* User distribution bars */
+/* Charts */
 .charts-section {
-  margin: 3rem 0;
+  margin: 4rem 0;
 }
 
 .user-distribution {
+  margin-top: -10rem!important;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-end;
-  gap: 2rem;
-  height: 200px;
+  gap: 2.5rem;
+  height: 220px;
 }
 
 .bar-container {
-  width: 80px;
+  width: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,27 +153,27 @@
 
 .bar {
   width: 100%;
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: 1rem 1rem 0 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  color: #fff;
   font-size: 0.9rem;
   font-weight: bold;
-  padding: 0.4rem 0;
+  padding: 0.5rem 0;
   transition: height 0.6s ease;
+  color: #fff;
 }
 
 .bar.formateur {
-  background-color: #3f51b5;
+  background: #3f51b5;
 }
 
 .bar.candidat {
-  background-color: #00bcd4;
+  background: #00bcd4;
 }
 
 .bar.admin {
-  background-color: #9c27b0;
+  background: #9c27b0;
 }
 
 .dark-mode .bar span {
@@ -179,18 +184,19 @@
 .next-session-card,
 .motivation-card,
 .support-card {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  margin: 1.5rem 0;
-  transition: background 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 1.8rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  margin: 2rem 0;
+  transition: all 0.3s ease;
 }
 
 .dark-mode .next-session-card,
 .dark-mode .motivation-card,
 .dark-mode .support-card {
-  background-color: #2e2e3e;
+  background-color: rgba(40, 40, 50, 0.6);
   color: #fff;
 }
 
@@ -200,7 +206,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
 }
 
@@ -218,8 +224,14 @@ blockquote {
 
 blockquote footer {
   font-size: 0.9rem;
-  color: #999;
+  color: #888;
   margin-top: 0.5rem;
+}
+
+/* Links */
+.support-card a {
+  color: #3f51b5;
+  text-decoration: underline;
 }
 
 /* Responsive */
@@ -237,11 +249,11 @@ blockquote footer {
   .user-distribution {
     flex-direction: column;
     height: auto;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .bar-container {
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
   }
 }
